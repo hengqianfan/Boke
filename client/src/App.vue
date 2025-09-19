@@ -9,8 +9,6 @@ import Banner from './components/Banner/index.vue'
 <template>
   <div class="app-all">
     <xNav />
-
-
     <Banner />
     <xMain />
   </div>

@@ -13,7 +13,7 @@
 .Banner-all {
     width: 100%;
     height: 60vh;
-    background-color: rebeccapurple;
+    // background-color: rebeccapurple;
 
     .Banner-img {
         width: 100%;

@@ -6,13 +6,17 @@ interface Config {
     PersonName: string;
     PersonSocialLinks: { name: string; link: string }[];
     CoverServer: string;
+    OutlineTitle?: string;
 }
+
+
 
 export const Config: Config = {
     siteName: 'Boke',
-    PersonPortrait: '/icons/logo.png',
+    PersonPortrait: `${import.meta.env.BASE_URL}/icons/logo.png`,
     PersonIntro: '拒绝内耗，先完成，再完美',
     PersonName: "衡千帆",
+    OutlineTitle: '🧭 页面导航',
     CoverServer: 'https://raw.githubusercontent.com/hengqianfan/nCover/refs/heads/main/repo/',
     PersonSocialLinks: [
         {

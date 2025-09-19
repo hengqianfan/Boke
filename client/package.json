@@ -16,9 +16,9 @@
   "dependencies": {
     "dompurify": "^3.2.6",
     "front-matter": "^4.0.2",
-    "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
     "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0",
     "markdown-it-container": "^4.0.0",
     "pinia": "^3.0.3",
     "sass": "^1.92.1",

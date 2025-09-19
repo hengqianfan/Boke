@@ -12,7 +12,7 @@ export default defineConfig({
     vueDevTools(),
   ],
   // 因为要托管到github pages，所以这里设置了 base 路径
-  base: '/boke/',
+  base: '/Boke/',
   build: {
     // 输出路径，相对于 vite.config.ts 所在目录
     outDir: '../docs',

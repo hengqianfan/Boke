@@ -1,13 +1,15 @@
 const r=`---\r
 title: 测试文件\r
-date: 2025-09-19\r
+date: 2025-09-16\r
 category:\r
 icon: \r
-tags: ['vue','vitepress']\r
+cover: 'vue'\r
+\r
+tags: ['vue','软件']\r
 ---\r
 \r
 \r
-我是测试文件2\r
+我是测试文件4\r
 \r
 \`\`\`js\r
 let res = 1\r

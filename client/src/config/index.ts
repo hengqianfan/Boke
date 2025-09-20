@@ -7,6 +7,9 @@ interface Config {
     PersonSocialLinks: { name: string; link: string }[];
     CoverServer: string;
     OutlineTitle?: string;
+    OutlineShow: boolean;
+    SearchDefaultKeyword: string
+    SearchEngineList: { name: string, icon: string, baseurl: string }[]
 }
 
 
@@ -16,7 +19,66 @@ export const Config: Config = {
     PersonPortrait: `${import.meta.env.BASE_URL}/icons/logo.png`,
     PersonIntro: '拒绝内耗，先完成，再完美',
     PersonName: "衡千帆",
+    SearchDefaultKeyword: '外站搜索',
+    SearchEngineList: [
+        {
+            name: "bing",
+            icon: "bing",
+            baseurl: "https://bing.com/search?q="
+        },
+        {
+            name: "google",
+            icon: "google",
+            baseurl: "https://www.google.com/search?q="
+        },
+        {
+            name: "baidu",
+            icon: "baidu",
+            baseurl: "https://baidu.com/s?wd="
+        },
+        {
+            name: "github",
+            icon: "github",
+            baseurl: "https://github.com/search?q="
+        },
+        {
+            name: "csdn",
+            icon: "csdn",
+            baseurl: "https://so.csdn.net/so/search?q="
+        },
+        {
+            name: "npm",
+            icon: "npm",
+            baseurl: "https://www.npmjs.com/search?q="
+        },
+        {
+            name: "zhihu",
+            icon: "zhihu2",
+            baseurl: "https://www.zhihu.com/search?type=content&q="
+        },
+        {
+            name: "bilibili",
+            icon: "bilibili",
+            baseurl: "https://search.bilibili.com/all?keyword="
+        },
+        {
+            name: "youtube",
+            icon: "youtube3",
+            baseurl: "https://www.youtube.com/results?search_query="
+        },
+        {
+            name: "haici",
+            icon: "haici",
+            baseurl: "https://corp.dict.cn/search?q="
+        },
+        {
+            name: "iciba",
+            icon: "iciba",
+            baseurl: "https://www.iciba.com/word?w="
+        }
+    ],
     OutlineTitle: '🧭 页面导航',
+    OutlineShow: false,
     CoverServer: 'https://raw.githubusercontent.com/hengqianfan/nCover/refs/heads/main/repo/',
     PersonSocialLinks: [
         {

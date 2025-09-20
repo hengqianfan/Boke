@@ -2,59 +2,11 @@
 @use './reset.scss';
 // 引入字体样式
 @use './font.scss';
+// 引入自定义的 md 基础样式
+@use './markdown.scss';
 // 引入自定义容器块样式
 @use './custom-block.scss';
-
-// 文本加粗
-strong {
-    font-weight: 600;
-}
-
-// 列表样式 
-ul {
-    list-style: disc;
-    /* 恢复默认圆点 */
-    padding-left: 1.5em;
-    // 优化高度
-    margin: 5px 0;
-    // border: 1px solid wheat;
-    // padding: 10px;
-
-
-}
-
-
-// 文本缩进
-p {
-    // text-indent: 2em;
-    line-height: 1.5;
-    margin: 5px 0;
-    // margin: 1em 0;
-}
-
-// 标题样式
-h1 {
-    font-size: 30px;
-    margin: 30px 0;
-    text-align: center;
-    font-family: '优设标题黑';
-    // background-color: rebeccapurple;
-}
-
-h2 {
-    font-size: 26px;
-    margin: 20px 0;
-    // margin-top: 100px;
-    // text-align: center;
-    font-family: '优设标题黑';
-    // color: rebeccapurple;
-}
-
-h3 {
-    font-size: 22px;
-    margin: 20px 0;
-    // margin-top: 100px;
-    // text-align: center;
-    font-family: '优设标题黑';
-    // color: rebeccapurple;
-}
+// 高亮代码块的样式
+@use './hljs.scss';
+// 指针样式
+@use './cursors.scss'

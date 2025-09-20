@@ -1,0 +1,179 @@
+// 文本加粗
+
+
+strong {
+    font-weight: 600;
+}
+
+// 列表样式 
+ul {
+    // 添加小圆点
+    list-style: disc;
+    padding-left: 2rem;
+    // 优化高度
+    margin: 5px 0;
+
+    // 关闭文本的缩进
+    p {
+
+        // 设置段落的首行缩进
+        text-indent: 0em;
+    }
+
+    li {
+        margin: 10px 0;
+
+        // 列表中的小代码块
+        code {
+            background-color: rgba(202, 209, 215, 0.434);
+            margin: 0 3px;
+            padding: 2px 6px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #3451b2;
+            font-family: '优设标题黑';
+            // 字符间距
+            letter-spacing: 1px;
+
+        }
+
+
+
+    }
+
+
+}
+
+
+// 文本
+p {
+    // 设置合理的行高
+    line-height: 1.8;
+    // 正文文本的颜色
+    color: #323238;
+    // 正文文本的字体
+    font-family: 'Inter';
+    // 设置段落的首行缩进
+    text-indent: 2em;
+    // 注意，列表中要把缩进清除
+
+
+}
+
+hr {
+    border: none;
+    height: 2px;
+    margin: 24px 0;
+    background: repeating-linear-gradient(to right,
+            transparent 0,
+            transparent 2px,
+            #ccc 10px,
+            #ccc 20px);
+    mask-image: linear-gradient(to right, transparent, black 40%, black 60%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 40%, black 60%, transparent);
+}
+
+
+
+// 标题样式
+h1 {
+    font-size: 30px;
+    margin: 30px 0;
+    text-align: center;
+    font-family: '优设标题黑';
+    // background-color: rebeccapurple;
+}
+
+h2 {
+    font-size: 26px;
+    margin: 20px 0;
+    margin-top: 100px;
+
+    font-family: '优设标题黑';
+    // 页面大纲跳转时，预留对导航栏的距离，以免被遮挡
+    scroll-margin-top: 100px;
+}
+
+h3 {
+    font-size: 22px;
+    margin: 20px 0;
+    margin-top: 50px;
+
+    // margin-top: 100px;
+    // text-align: center;
+    font-family: '优设标题黑';
+    // color: rebeccapurple;
+    // 页面大纲跳转时，预留对导航栏的距离，以免被遮挡
+    scroll-margin-top: 100px;
+}
+
+h4 {
+    font-size: 18px;
+    margin: 20px 0;
+    margin-top: 50px;
+    color: #323238;
+    font-family: '优设标题黑';
+    // 页面大纲跳转时，预留对导航栏的距离，以免被遮挡
+    scroll-margin-top: 100px;
+}
+
+// 行内代码设置
+p {
+    code {
+        background-color: rgba(202, 209, 215, 0.434);
+        margin: 0 3px;
+        padding: 2px 6px;
+        border-radius: 5px;
+        font-size: 14px;
+        color: #3451b2;
+        font-family: '优设标题黑';
+        // 字符间距
+        letter-spacing: 1px;
+
+    }
+}
+
+// 链接样式
+
+a {
+    margin: 0 5px;
+    font-size: 15px;
+    color: #3451b2;
+    // cursor: pointer;
+
+    text-decoration: underline;
+    text-decoration-thickness: 1px; // 下划线粗细
+    text-underline-offset: 4px; // 👈 控制下划线和文字的距离
+
+
+}
+
+
+a:hover {
+    color: #b95318;
+}
+
+
+:root {
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px 12px;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    th {
+        background-color: #f5f5f5;
+        font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+        background-color: #fafafa;
+    }
+
+    tr:hover {
+        background-color: #f0f8ff;
+    }
+}

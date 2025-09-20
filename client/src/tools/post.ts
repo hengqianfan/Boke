@@ -4,31 +4,45 @@ import DOMPurify from 'dompurify'
 import hljs from 'highlight.js'
 import container from 'markdown-it-container'
 import anchor from 'markdown-it-anchor'
+import { countWords } from '@/tools/wordCount'
 import type { Post, PostMeta, Heading } from '@/types/post'
+
+
 
 // 用于保存 headings 数组
 let headings: Heading[] = []
 
 
 // Markdown 渲染器
+
 const md: any = new MarkdownIt({
-    // 允许在文档中使用 HTML 标签
     html: true,
+    // 
     linkify: true,
     typographer: true,
     highlight: (str, lang) => {
-        try {
-            if (lang && hljs.getLanguage(lang)) {
-                return `<pre class="hljs"><code>${hljs.highlight(str, { language: lang }).value
-                    }</code></pre>`
-            }
-            return `<pre class="hljs"><code>${hljs.highlightAuto(str).value
-                }</code></pre>`
-        } catch {
-            return `<pre class="hljs"><code>${md.utils.escapeHtml(str)}</code></pre>`
-        }
-    },
+        // const escaped = md.utils.escapeHtml(str)
+        const encoded = encodeURIComponent(str)
+        const codeHtml = lang && hljs.getLanguage(lang)
+            ? hljs.highlight(str, { language: lang }).value
+            : hljs.highlightAuto(str).value
+        const fileType = lang || 'text'
+        // 包裹按钮和代码块
+        return `
+        <div class="code-block-wrapper">
+          <div class="code-block-header">${fileType}</div>
+          <button class="copy-btn" data-code="${encoded}">复制</button>
+          <pre class="hljs"><code>${codeHtml}</code></pre>
+        </div>
+      `
+    }
+
+
 })
+
+
+
+
 
 // 注册 anchor 插件，给标题加 id
 md.use(anchor, {
@@ -38,6 +52,9 @@ md.use(anchor, {
 
 // 收集 headings
 md.use((md: any) => {
+
+
+
     const defaultRender =
         md.renderer.rules.heading_open ||
         function (tokens: any, idx: any, options: any, env: any, self: any) {
@@ -59,6 +76,7 @@ md.use((md: any) => {
         return defaultRender(tokens, idx, options, env, self)
     }
 })
+
 
 
 
@@ -85,7 +103,7 @@ md.use(container, 'info', {
         if (token.nesting === 1) {
             // 取出 ::: info 后面的内容（作为标题）
             const info = token.info.trim().slice('info'.length).trim()
-            const title = info || '信息' // 如果没写标题，就用默认值
+            const title = info || 'INFO' // 如果没写标题，就用默认值
 
             return `<div class="custom-block-info"><p class="custom-block-title"> ${title}</p>\n`
         } else {
@@ -93,6 +111,13 @@ md.use(container, 'info', {
         }
     },
 })
+
+
+
+
+
+
+
 
 // 动态导入 posts 文件夹下所有 md（返回 raw 文本）
 const modules = import.meta.glob('../posts/*.md', {
@@ -104,39 +129,39 @@ const modules = import.meta.glob('../posts/*.md', {
 >
 
 
-
-
-
 /** 按 slug 动态加载文章 */
-export async function getPostBySlug(slug: any): Promise<Post | null> {
+export async function getPostBySlug(slug: string): Promise<Post | null> {
     const key = `../posts/${slug}.md`
 
     const loader = modules[key]
     if (!loader) return null
-
     const raw = await loader()
-
     const parsed = fm<PostMeta>(raw) // front-matter 解析
-
-
     const content = parsed.body.trim()
+    // 字数统计
+    const wordCount = countWords(content)
     // 每次渲染前清空 headings
     headings = []
     const rendered = md.render(content)
-    const safeHtml = DOMPurify.sanitize(rendered)
+    // 消毒
+    const safeHtml = DOMPurify.sanitize(rendered, {
+        ADD_ATTR: ['href', 'target', 'rel'],
+    })
 
     const meta: PostMeta = {
         title: parsed.attributes.title ?? slug,
         // 将 date 转成时间戳
-
         date: parsed.attributes.date ? new Date(parsed.attributes.date).getTime() : 0,
         tags: parsed.attributes.tags,
         cover: parsed.attributes.cover,
         pin: parsed.attributes.pin ?? 0,
+        wordCount,
         excerpt:
             parsed.attributes.excerpt ??
             content.slice(0, 160).replace(/\n/g, ' '),
     }
+
+
 
     return { slug, meta, html: safeHtml, raw: content, headings, id: slug }
 }
@@ -157,6 +182,7 @@ export async function getAllPostsMeta(): Promise<
         const parsed = fm<PostMeta>(raw)
         // 提取正文
         const content = parsed.body.trim()
+
         result.push({
             slug,
             meta: {
@@ -165,7 +191,8 @@ export async function getAllPostsMeta(): Promise<
                 pin: parsed.attributes.pin ?? 0,
 
                 tags: parsed.attributes.tags,
-                cover: parsed.attributes.cover,
+                // 若不存在时，设置默认封面
+                cover: parsed.attributes.cover ?? 'momo',
                 excerpt:
                     parsed.attributes.excerpt ??
                     content.slice(0, 160).replace(/\n/g, ' '),

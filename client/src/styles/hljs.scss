@@ -1,0 +1,55 @@
+.code-block-wrapper {
+    position: relative;
+    background-color: whitesmoke !important;
+    padding: 0 25px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px #dedede,
+        -2px -2px 5px #f2f0f0;
+
+
+    .code-block-header {
+        // position: absolute;
+        top: 0;
+        right: 10px;
+        padding: 0 10px;
+
+        font-weight: 600;
+        color: #1c1245;
+
+    }
+
+
+    .copy-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 2px 6px;
+        font-size: 0.75rem;
+        background: rgba(0, 0, 0, 0.2);
+        color: #fff;
+        border: none;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        transition: all 1s ease;
+
+        &:hover {
+            background-color: rgb(68, 165, 217);
+            // color: red;
+        }
+    }
+
+    pre.hljs {
+        margin: 0;
+        padding: 16px;
+        overflow: auto;
+        border-radius: 5px;
+        line-height: 1.6;
+        font-size: 13px;
+
+    }
+
+    // pre.hljs code .hljs-comment {
+    //     color: #377a18 !important;
+    // }
+
+}

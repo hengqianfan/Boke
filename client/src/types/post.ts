@@ -21,8 +21,8 @@ export interface PostMeta {
   cover?: string
   excerpt?: string
   pin?: number
-
-  [k: string]: any
+  wordCount?: number
+  // [k: string]: any
 }
 
 

@@ -6,11 +6,18 @@
             </div>
             <div class="nav-siteName" @click="goHome">{{ Config.siteName }}</div>
         </div>
-        <div class="nav-searcher">search</div>
+
+
+
         <div class="nav-menu">
             <router-link to="/" class="nav-menu-item">主页</router-link>
             <router-link to="/about" class="nav-menu-item">关于</router-link>
+            <a href="https://hengqianfan.github.io/xSites/" class="nav-menu-item">网站</a>
+
         </div>
+
+        <NavSearch></NavSearch>
+
 
     </div>
 </template>
@@ -18,6 +25,9 @@
 <script lang="ts" setup>
 import { Config } from '@/config'
 import { useRouter } from 'vue-router';
+import NavSearch from '../NavSearch/index.vue';
+
+
 const router = useRouter();
 // 跳转到 /home
 const goHome = () => {
@@ -32,14 +42,16 @@ const goHome = () => {
     // 让导航栏水平居中
     // 这里 auto 无法控制居中
     margin: 0 5%;
+    padding: 0 8%;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     background-color: white;
 
-    padding-left: 50px;
-    padding-right: 50px;
+
+
     border-radius: 0 0 15px 15px;
 
     box-shadow: 2px 2px 5px #dedede,
@@ -61,6 +73,8 @@ const goHome = () => {
         .nav-siteLogo {
             width: 30px;
             height: 30px;
+            border-radius: 10px;
+            overflow: hidden;
 
             img {
                 width: 100%;
@@ -79,10 +93,12 @@ const goHome = () => {
         display: flex;
 
         .nav-menu-item {
-            margin-left: 20px;
+            margin: 0 20px;
             text-decoration: none;
             color: black;
             font-weight: 500;
+            font-family: '剑豪体';
+            transition: all 0.8 ease;
 
             &:hover {
                 color: #007bff;

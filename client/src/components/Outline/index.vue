@@ -30,7 +30,8 @@ const props = defineProps<{
 }>()
 
 const activeSlug = ref<string>('')
-const isOpen = ref<boolean>(false)
+// 默认打开
+const isOpen = ref<boolean>(Config.OutlineShow ?? false)
 
 function scrollToHeading(slug: string) {
     const el = document.getElementById(slug)
@@ -146,7 +147,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 
             &.active>a {
                 color: #42b983;
-                font-weight: bold;
+                // font-weight: bold;
             }
         }
 
@@ -159,6 +160,10 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
                 color: #42b983;
             }
         }
+
+
+
+
     }
 }
 </style>

@@ -1,0 +1,31 @@
+/* 默认光标 */
+body,
+html {
+    cursor: url('/cursors/Normal\ Select.cur'), default;
+}
+
+/* 手型指针（原 pointer） */
+button,
+a,
+.pointer {
+    cursor: url('/cursors/Link\ Select.cur'), pointer;
+}
+
+/* 文本输入光标 */
+input,
+textarea,
+.text {
+    cursor: url('/cursors/Text\ Select.cur'), text;
+}
+
+/* 可抓取 / 拖拽光标 */
+.drag-area,
+.grab {
+    // cursor: url('/cursor/grab.cur'), grab;
+}
+
+/* 禁用光标 */
+button:disabled,
+.disabled {
+    // cursor: not-allowed;
+}

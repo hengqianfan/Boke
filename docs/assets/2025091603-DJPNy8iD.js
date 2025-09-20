@@ -1,8 +1,10 @@
-const n=`---\r
+const r=`---\r
 title: 测试文件\r
 date: 2025-09-16\r
 category:\r
 icon: \r
+cover: 'vue'\r
+\r
 tags: ['nest']\r
 ---\r
 \r
@@ -11,4 +13,4 @@ tags: ['nest']\r
 \r
 \`\`\`js\r
 let res = 1\r
-\`\`\``;export{n as default};
+\`\`\``;export{r as default};

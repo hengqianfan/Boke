@@ -1,58 +1,60 @@
-<template>
+这是我的页面，你直接改造：<template>
   <div class="home-all">
-    <!-- 
-    <div class="tags-container">
-      <div class="tag" v-for="([key, value], index) in Alltags">
-        {{ key }} <span>{{ value }}</span>
+
+
+    <div class="post-categoryList">
+      <div v-for="(count, item) in postStore.categories" :key="item" @click="postStore.setCategory(item)"
+        :class="['post-categoryList-item', { active: postStore.selectedCategory === item }]">
+        {{ item }}
+        <span> {{ count }}</span>
+
       </div>
-
     </div>
-    <div class=""></div> -->
 
 
-    <div class="posts-container">
+    <TransitionGroup name="slide-fade" tag="div" class="posts-container">
 
-      <div class="articlesCard" v-for="item in posts">
+      <div class="articlesCard" v-for="(item, i) in postStore.paginatedPosts" :key="item.slug" :data-index="i">
         <div class="articlesCard-cover">
-          <img :src="getImgSrc(item.meta.cover || '')" alt="" class="articlesCard-cover-img">
-          <div class="articlesCard-cover-pin" v-if="!(item.meta.pin == 0)">置顶</div>
+          <img :src="getImgSrc(item.cover || '')" alt="" class="articlesCard-cover-img">
+          <div class="articlesCard-cover-pin" v-if="!(item.pin == 0)">置顶</div>
         </div>
 
         <router-link class="articlesCard-title" :to="`/post/${item.slug}`">
-          {{ item.meta.title }}
+          {{ item.title }}
         </router-link>
 
-        <!-- 
-        <a class="articlesCard-title" @click.prevent="goDetail(item.meta.slug)">
-          {{ item.meta.title }}
-        </a> -->
+
 
         <div class="articlesCard-info">
-          <div class="articlesCard-time">{{ `time` }}</div>
+          <div class="articlesCard-time">{{ formatDate_timestamp(item.date || 0) }}</div>
           <div class="articlesCard-tags">
-            <div class="articlesCard-tag" v-for="tag in item.meta.tags?.slice(0, 3) || []">{{ tag }}</div>
+            <div @click="postStore.setTag(tag)" class="articlesCard-tag" v-for="tag in item.tags?.slice(0, 3) || []">{{
+              tag }}</div>
           </div>
         </div>
-        <!-- <div>{{ item }}</div> -->
 
       </div>
+    </TransitionGroup>
 
+    <!-- ✅ 分页栏 -->
+    <div class="pagination">
+      <button @click="postStore.setPage(postStore.currentPage - 1)" :disabled="postStore.currentPage === 1">
+        上一页
+      </button>
 
-      <!-- <div class="post" v-for="p in posts" :key="p.slug">
-        {{ p.meta.title }}
-      </div> -->
+      <span v-for="page in postStore.totalPages" :key="page">
+        <button @click="postStore.setPage(page)" :class="{ active: postStore.currentPage === page }">
+          {{ page }}
+        </button>
+      </span>
+
+      <button @click="postStore.setPage(postStore.currentPage + 1)"
+        :disabled="postStore.currentPage === postStore.totalPages">
+        下一页
+      </button>
     </div>
 
-
-
-    <!-- 
-      <ul>
-        <li v-for="p in posts" :key="p.slug">
-          <RouterLink :to="`/post/${p.slug}`">{{ p.meta.title }}</RouterLink>
-          <small> {{ p.meta.date }} </small>
-          <p>{{ p.meta.excerpt }}</p>
-        </li>
-      </ul> -->
 
 
   </div>
@@ -62,73 +64,20 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { formatDate_timestamp } from '@/tools/format'
 
-import { ref, onMounted } from 'vue'
-import { getAllPostsMeta } from '@/tools/post'
 import { Config } from '@/config';
-import type { PostMeta } from '@/types/post';
 
-const posts = ref<{ slug: string; meta: PostMeta }[]>([])
+import { usePostsStore } from '@/stores/posts'
+import { useThemeStore } from '@/stores/theme'
+const themeStore = useThemeStore()
+// import gsap from 'gsap'
+const postStore = usePostsStore()
 
-// 定义 tags 数组
-const Alltags = ref<Map<string, number>>()
-
-
-onMounted(async () => {
-  posts.value = await getAllPostsMeta()
-  // 将得到的文章数据传给 getALLTags 函数
-  Alltags.value = getAllTags(posts.value)
-})
+// const categoryList = ref<string[]>([])
 
 
 
-
-const getAllTags = (data: any) => {
-
-  // 临时存放数据的数组
-  let temp_arr = []
-  // 遍历原始数据，把所有 tag 添加到 临时数组中
-
-  for (let i = 0; i < data.length; i++) {
-    // 先判断是否存在 信息中是否存在 tag ⭐
-    if (data[i].meta.tags) {
-      // 获取当前文章的 tag 数组
-      let now_tagarr = data[i].meta.tags
-      // 解构数组后，再添加到临时数组中
-      temp_arr.push(...now_tagarr)
-    }
-  }
-
-
-  const map = new Map<string, number>();
-  for (const str of temp_arr) {
-    map.set(str, (map.get(str) || 0) + 1);
-  }
-  // 将 map 对象
-  return map;
-}
-
-// 定义 categories 数组
-const Allcategories = ref<string[]>()
-
-const getAllCategories = (data: any) => {
-
-  // 临时存放数据的数组
-  let temp_arr = []
-  // 遍历原始数据，把所有 tag 添加到 临时数组中
-
-  for (let i = 0; i < data.length; i++) {
-    // 先判断是否存在 信息中是否存在 tag ⭐
-    if (data[i].meta.category) {
-      // 获取当前文章的 tag 数组
-      let now_tagarr = data[i].meta.category
-      // 解构数组后，再添加到临时数组中
-      temp_arr.push(...now_tagarr)
-    }
-  }
-
-}
 
 const getImgSrc = (mo: string) => {
   // 1. 如果没有封面图片，则返回默认图片
@@ -141,21 +90,57 @@ const getImgSrc = (mo: string) => {
 
 
 
-const router = useRouter()
-const goDetail = (id: number) => {
-  router.push(`/post/${id}`)
-}
-
-
 </script>
 
 <style lang="scss" scoped>
 .home-all {
   width: 100%;
   margin-top: 10px;
-
   display: flex;
   flex-direction: column;
+  // 美化：避免页面底部紧贴浏览器窗口
+  padding-bottom: 200px;
+
+
+
+  .post-categoryList {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    transition: all 1s ease;
+
+    .post-categoryList-item {
+      margin: 0 10px;
+      min-width: 50px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s;
+      font-size: 14px;
+      font-family: '优设标题黑';
+      color: #35243f;
+      padding: 0 5px;
+      border-bottom: 3px solid transparent;
+
+
+      span {
+        margin-left: 5px;
+        color: #1d7e76;
+      }
+
+      &.active {
+        border-bottom: 3px solid #1d7e76;
+        color: #1d7e76;
+
+        span {
+          color: #dfa73d;
+        }
+      }
+    }
+
+  }
+
 
 
   .tags-container {
@@ -178,18 +163,18 @@ const goDetail = (id: number) => {
   .posts-container {
     width: 100%;
     min-height: 60vh;
-    // background-color: yellow;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    // padding-bottom: 50px;
 
     .articlesCard {
       // margin: 10px;
       margin-bottom: 20px;
       margin-left: 20px;
       width: 320px;
-      min-height: 200px;
-
+      // min-height: 200px;
+      max-height: 280px;
       border-radius: 15px;
       background-color: white;
 
@@ -203,7 +188,7 @@ const goDetail = (id: number) => {
         height: 180px;
         border-radius: 15px 15px 0 0;
         overflow: hidden;
-        transition: all 0.6s;
+        transition: all 0.6s ease;
         position: relative;
 
 
@@ -247,19 +232,27 @@ const goDetail = (id: number) => {
 
 
       .articlesCard-title {
-        border-top: 1px solid #f1eef5;
+        // 基本布局
+        display: block;
+        text-align: center; // 文字居中
+        padding: 0 20px; // 设置内边距，防止文字贴边
         width: 100%;
         height: 50px;
         line-height: 50px;
-        text-align: center;
-        font-size: 20px;
-        text-decoration: none;
-        color: black;
         background-color: white;
+
+        // 字体样式
+        font-size: 20px;
+        text-decoration: none; // 清除链接下划线
+        color: black;
         font-family: "优设标题黑";
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        border-top: 1px solid #f1eef5; // 此处是避免白色封面导致边界不清晰
+
+        // 防止标题溢出
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
       }
 
       .articlesCard-title:hover {
@@ -337,5 +330,53 @@ const goDetail = (id: number) => {
       }
     }
   }
+
+  /* 只新增分页样式 */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    font-size: 12px;
+
+    button {
+      margin: 0 10px;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      background-color: white;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:disabled {
+        color: #aaa;
+        border-color: #eee;
+        cursor: not-allowed;
+      }
+    }
+
+    span {
+      font-size: 14px;
+    }
+  }
+
+}
+
+
+// 动画效果 
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-30px); // 左侧进入
+}
+
+.slide-fade-enter-to,
+.slide-fade-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.8s ease;
 }
 </style>

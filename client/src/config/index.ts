@@ -8,13 +8,18 @@ interface Config {
     CoverServer: string;
     OutlineTitle?: string;
     OutlineShow: boolean;
-    SearchDefaultKeyword: string
+    /**
+     * 自动去除文件名前的排序编码
+     */
+    AutoFormatFileName?: boolean;
+    SearchDefaultKeyword: string;
     SearchEngineList: { name: string, icon: string, baseurl: string }[]
 }
 
 
 
 export const Config: Config = {
+    AutoFormatFileName: true,
     siteName: 'Boke',
     PersonPortrait: `${import.meta.env.BASE_URL}/icons/logo.png`,
     PersonIntro: '拒绝内耗，先完成，再完美',

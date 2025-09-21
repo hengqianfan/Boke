@@ -11,7 +11,7 @@
         <div class="post-wordCount"> 字数：{{ post.meta.wordCount }}</div>
         |
 
-        <div class="post-tag" v-for="tag in post.meta.tags">{{ tag }}</div>
+        <div @click="backHomeByTag(tag)" class="post-tag" v-for="tag in post.meta.tags">{{ tag }}</div>
 
       </div>
 
@@ -21,7 +21,7 @@
     </article>
 
     <div v-else>文章不存在</div>
-    <Outline :headings="post?.headings || []" />
+    <Outline :headings="post?.outline || []" />
 
   </div>
 
@@ -30,18 +30,28 @@
 <script lang="ts" setup>
 import { ref, onMounted, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
+
 import { getPostBySlug } from '@/tools/post'
 import { formatDate_timestamp } from '@/tools/format'
 import { Config } from '@/config'
-
 import Outline from '@/components/Outline/index.vue'
+import { usePostsStore } from '@/stores/posts'
 
 import type { Post } from '@/types/post'
 const route = useRoute()
+const router = useRouter()
+
 const slug = String(route.params.slug || '')
 const post = ref<Post | null>(null)
 
+const postStore = usePostsStore()
 
+const backHomeByTag = (tag: string) => {
+  postStore.setTag(tag)   // 设置标签筛选
+  router.push('/')        // 跳回主页
+
+}
 
 
 onMounted(async () => {

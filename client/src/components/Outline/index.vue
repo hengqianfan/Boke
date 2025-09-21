@@ -22,11 +22,11 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { Config } from '@/config'
-import type { Heading } from '@/types/post'
+import type { OutlineHeading } from '@/types/post'
 
 
 const props = defineProps<{
-    headings: Heading[]
+    headings: OutlineHeading[]
 }>()
 
 const activeSlug = ref<string>('')

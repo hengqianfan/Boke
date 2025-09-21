@@ -9,4 +9,21 @@
 // 高亮代码块的样式
 @use './hljs.scss';
 // 指针样式
-@use './cursors.scss'
+@use './cursors.scss';
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+html,
+body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}

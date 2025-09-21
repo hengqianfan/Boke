@@ -22,3 +22,31 @@ export const formatDate_timestamp = (timestamp: number): string => {
     const date = new Date(timestamp);
     return date.toISOString().split('T')[0]
 }
+
+/**
+ * 根据空格符，格式化文件名，保留第一个空格符后面的字符
+ * @param filename 处理前的名称
+ * @returns 处理后的名称
+ */
+export const formatFileName = (filename: string): string => {
+    const index = filename.indexOf(" ")
+    if (index === -1) return filename  // 没有空格时，直接返回
+    return filename.slice(index + 1)   // 去掉第一个空格前的部分
+}
+
+
+export function extractTimestamp(filename: string): number {
+    if (!filename) return 0
+    const firstPart = filename.split(' ')[0]  // 获取空格前部分
+    if (!/^\d{8}$/.test(firstPart)) return 0  // 不是8位数字则返回 null
+
+    const yy = Number(firstPart.slice(0, 2))
+    const mm = Number(firstPart.slice(2, 4)) - 1  // JS 月份0-11
+    const dd = Number(firstPart.slice(4, 6))
+    const hh = Number(firstPart.slice(6, 8))
+
+    const fullYear = yy < 70 ? 2000 + yy : 1900 + yy  // 处理年份
+
+    const date = new Date(fullYear, mm, dd, hh)
+    return date.getTime()
+}

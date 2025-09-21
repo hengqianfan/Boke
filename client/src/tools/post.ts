@@ -5,12 +5,17 @@ import hljs from 'highlight.js'
 import container from 'markdown-it-container'
 import anchor from 'markdown-it-anchor'
 import { countWords } from '@/tools/wordCount'
-import type { Post, PostMeta, Heading } from '@/types/post'
+import { formatFileName, extractTimestamp } from '@/tools/format'
+
+import type { Post, PostMeta, OutlineHeading, AllPostsMeta } from '@/types/post'
+
+
+import { Config } from '@/config'
 
 
 
 // 用于保存 headings 数组
-let headings: Heading[] = []
+let headings: OutlineHeading[] = []
 
 
 // Markdown 渲染器
@@ -149,6 +154,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     })
 
     const meta: PostMeta = {
+        slug: slug,
         title: parsed.attributes.title ?? slug,
         // 将 date 转成时间戳
         date: parsed.attributes.date ? new Date(parsed.attributes.date).getTime() : 0,
@@ -163,50 +169,73 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 
 
 
-    return { slug, meta, html: safeHtml, raw: content, headings, id: slug }
+    return { meta, html: safeHtml, raw: content, outline: headings, id: slug }
 }
 
-/** 获取所有文章 meta 列表（不加载 html） */
-export async function getAllPostsMeta(): Promise<
-    { slug: string; meta: PostMeta }[]
-> {
-    // 定义返回的结果数组
-    const result: { slug: string; meta: PostMeta }[] = []
+export async function getAllPostsMeta(): Promise<AllPostsMeta> {
+
+    const MetaList: PostMeta[] = [];
+
 
     for (const key in modules) {
-        // 获取文件名
-        const slug = key.split('/').pop()!.replace(/\.md$/, '')
-        // 获取文件的 raw 文本 
-        const raw = await modules[key]()
-        // 解析 front-matter
-        const parsed = fm<PostMeta>(raw)
-        // 提取正文
-        const content = parsed.body.trim()
+        const slug = key.split('/').pop()!.replace(/\.md$/, '');
+        const raw = await modules[key]();
+        const parsed = fm<PostMeta>(raw);
+        const content = parsed.body.trim();
 
-        result.push({
+        let fileNameByFormat: string = slug
+
+        let fileTime: number = parsed.attributes.date ? new Date(parsed.attributes.date).getTime() : 0
+
+        if (Config.AutoFormatFileName) {
+            fileNameByFormat = formatFileName(slug)
+            fileTime = extractTimestamp(slug)
+
+        }
+
+        const meta: PostMeta = {
             slug,
-            meta: {
-                title: parsed.attributes.title ?? slug,
-                date: parsed.attributes.date ? new Date(parsed.attributes.date).getTime() : 0,
-                pin: parsed.attributes.pin ?? 0,
+            title: parsed.attributes.title ?? fileNameByFormat,
+            date: fileTime,
+            pin: parsed.attributes.pin ?? 0,
+            tags: parsed.attributes.tags ?? [],
+            category: parsed.attributes.category ?? '未知',
+            cover: parsed.attributes.cover ?? 'momo',
+            excerpt: parsed.attributes.excerpt ??
+                content.replace(/\n+/g, ' ').replace(/\s+/g, ' ').slice(0, 160),
+        };
 
-                tags: parsed.attributes.tags,
-                // 若不存在时，设置默认封面
-                cover: parsed.attributes.cover ?? 'momo',
-                excerpt:
-                    parsed.attributes.excerpt ??
-                    content.slice(0, 160).replace(/\n/g, ' '),
-            },
-        })
+
+
+        MetaList.push(meta);
     }
-    // 按日期倒序
-    result.sort((a, b) => {
-        // 获取
-        const da = a.meta.date ? new Date(a.meta.date).getTime() : 0
-        const db = b.meta.date ? new Date(b.meta.date).getTime() : 0
-        return db - da
-    })
-    // 按置顶排序
-    result.sort((a, b) => (b.meta.pin ?? 0) - (a.meta.pin ?? 0))
-    return result
+
+
+
+    // 合并排序：先置顶，再按日期倒序
+    MetaList.sort((a, b) => {
+        const pinDiff = (b.pin ?? 0) - (a.pin ?? 0);
+        if (pinDiff !== 0) return pinDiff;
+
+        return (b.date ?? 0) - (a.date ?? 0);
+    });
+
+
+    // 生成去重分类列表
+    const categoryList = Array.from(new Set(MetaList.map(meta => meta.category ?? '未知')));
+
+    return {
+        categoryList,
+        MetaList,
+    };
+}
+
+
+
+
+export async function getCategoryList(): Promise<string[]> {
+    const posts: AllPostsMeta = await getAllPostsMeta()
+    const tags = posts.MetaList.flatMap(p => p.tags ?? [])
+    // 去重
+    return [...new Set(tags)]
 }

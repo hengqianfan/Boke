@@ -1,7 +1,9 @@
-/* 默认光标 */
+// 定义默认的光标样式
 body,
 html {
     cursor: url('/cursors/Normal\ Select.cur'), default;
+
+
 }
 
 /* 手型指针（原 pointer） */
@@ -21,7 +23,7 @@ textarea,
 /* 可抓取 / 拖拽光标 */
 .drag-area,
 .grab {
-    // cursor: url('/cursor/grab.cur'), grab;
+    cursor: url('/client/public/cursors/Handwriting.cur'), grab;
 }
 
 /* 禁用光标 */

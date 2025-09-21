@@ -94,14 +94,25 @@ const goHome = () => {
 
         .nav-menu-item {
             margin: 0 20px;
+            font-size: 18px;
             text-decoration: none;
             color: black;
             font-weight: 500;
             font-family: '剑豪体';
             transition: all 0.8 ease;
+            // 让下划线不紧贴文字
+            padding: 5px 0;
+
+            &.router-link-exact-active {
+                color: #564dac;
+
+                border-bottom: 1px solid #564dac;
+            }
+
 
             &:hover {
-                color: #007bff;
+                color: #564dac;
+
             }
         }
     }

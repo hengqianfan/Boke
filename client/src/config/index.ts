@@ -5,6 +5,7 @@ interface Config {
     PersonIntro: string;
     PersonName: string;
     PersonSocialLinks: { name: string; link: string }[];
+    IconServer: string;
     CoverServer: string;
     OutlineTitle?: string;
     OutlineShow: boolean;
@@ -14,8 +15,8 @@ interface Config {
     AutoFormatFileName?: boolean;
     SearchDefaultKeyword: string;
     SearchEngineList: { name: string, icon: string, baseurl: string }[]
+    animationMode: 'none' | 'slide-fade'
 }
-
 
 
 export const Config: Config = {
@@ -24,6 +25,7 @@ export const Config: Config = {
     PersonPortrait: `${import.meta.env.BASE_URL}/icons/logo.png`,
     PersonIntro: '拒绝内耗，先完成，再完美',
     PersonName: "衡千帆",
+    animationMode: 'slide-fade',
     SearchDefaultKeyword: '外站搜索',
     SearchEngineList: [
         {
@@ -84,6 +86,7 @@ export const Config: Config = {
     ],
     OutlineTitle: '🧭 页面导航',
     OutlineShow: false,
+    IconServer: 'https://raw.githubusercontent.com/hengqianfan/nIcon/refs/heads/main/repo/',
     CoverServer: 'https://raw.githubusercontent.com/hengqianfan/nCover/refs/heads/main/repo/',
     PersonSocialLinks: [
         {

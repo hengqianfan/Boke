@@ -8,7 +8,7 @@
 
         <div class="post-time"> ⏰ {{ formatDate_timestamp(post.meta.date || 0) }}</div>
         |
-        <div class="post-wordCount"> 字数：{{ post.meta.wordCount }}</div>
+        <div class="post-wordCount"> 字数：{{ post.meta.wordCount }} 👁‍🗨 阅读：{{ post.meta.readTime }} min</div>
         |
 
         <div @click="backHomeByTag(tag)" class="post-tag" v-for="tag in post.meta.tags">{{ tag }}</div>
@@ -16,11 +16,13 @@
       </div>
 
       <hr>
-      <!-- <p v-if="post.meta.date">{{ post.meta.date }}</p> -->
+
       <div v-html="post.html" class="markdown-body"></div>
     </article>
 
+
     <div v-else>文章不存在</div>
+
     <Outline :headings="post?.outline || []" />
 
   </div>
@@ -57,7 +59,6 @@ const backHomeByTag = (tag: string) => {
 onMounted(async () => {
   post.value = await getPostBySlug(slug)
 
-
   // 设置网页标题
   if (post.value?.meta.title) {
     document.title = `${post.value.meta.title} | ${Config.siteName}`
@@ -79,8 +80,6 @@ onMounted(async () => {
         setTimeout(() => (target.textContent = '复制'), 1000)
       })
     }
-
-
 
 
   })
@@ -109,20 +108,25 @@ onMounted(async () => {
   padding-bottom: 30vh;
 
   .post-tags {
-    height: 30px;
+    // height: 30px;
+    min-height: 30px;
     // background-color: rebeccapurple;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    // 防止标签过多时，贴边
+    padding: 0 20px;
 
-    // background-color: rebeccapurple;
+
+
     // 公共样式
     div {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 10px;
+      margin: 10px;
       padding: 5px 8px;
       border-radius: 10px;
       font-size: 12px;
@@ -136,8 +140,11 @@ onMounted(async () => {
     }
 
     .post-tag {
+      min-width: 40px;
       color: #eee;
       background-color: rgb(123, 165, 202);
+      margin: 0 0 0 10px;
+
 
     }
 

@@ -1,10 +1,8 @@
 ---
-aside: left
+category: '教程'
 tags: ['运维','googleAnalytics']
 icon: 'logo'
-open: false
-id: 
-mothbal: true
+
 ---
  
 ######  {{ $frontmatter.id? $frontmatter.id : $frontmatter.zoid }}

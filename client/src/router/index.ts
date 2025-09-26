@@ -1,20 +1,39 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 
-
-
 const routes = [
   {
     path: '/',
     component: () => import('@/pages/home.vue'),
-
   },
-  { path: '/post/:slug', component: () => import('@/pages/PostDetail.vue'), props: true },
+  {
+    path: '/post/:slug',
+    component: () => import('@/components/MainDoc/index.vue'),
+
+
+    props: true,
+    // meta: {}
+  },
   {
     path: '/about',
     component: () => import('@/pages/home.vue'),
     meta: { title: "" }
+  },
+  {
+    path: '/sites',
+    component: () => import('@/pages/Sites.vue')
+  },
+  {
+    path: '/notes',
+    component: () => import('@/pages/Notes.vue')
+  },
+  {
+    path: '/notes/:top/:sub*',
+    component: () => import('@/components/MainDoc/index.vue')
+    // component: () => import('@/pages/NoteDetail.vue')
+
   }
+
 ]
 
 export default createRouter({

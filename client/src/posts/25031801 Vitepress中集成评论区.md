@@ -1,11 +1,8 @@
 ---
-aside: left
+category: '编程'
 tags: ['vitepress','vue','Giscus']
 icon: 'vitepress'
-open: true
-id: 25031801
 cover: 'vitepress'
-
 
 ---
 

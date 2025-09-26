@@ -32,6 +32,9 @@ export interface PostMeta {
   pin?: number
   // 字数统计
   wordCount?: number
+  // 阅读时间（分钟）
+  readTime?: number
+  password?: string
 
 }
 

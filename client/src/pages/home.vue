@@ -12,7 +12,7 @@
     </div>
 
 
-    <TransitionGroup name="slide-fade" tag="div" class="posts-container">
+    <TransitionGroup :name="Config.animationMode" tag="div" class="posts-container">
 
       <div class="articlesCard" v-for="(item, i) in postStore.paginatedPosts" :key="item.slug" :data-index="i">
         <div class="articlesCard-cover">
@@ -21,6 +21,9 @@
         </div>
 
         <router-link class="articlesCard-title" :to="`/post/${item.slug}`">
+          <span v-show="item?.password">
+            🔒
+          </span>
           {{ item.title }}
         </router-link>
 
@@ -71,10 +74,8 @@ import { Config } from '@/config';
 import { usePostsStore } from '@/stores/posts'
 import { useThemeStore } from '@/stores/theme'
 const themeStore = useThemeStore()
-// import gsap from 'gsap'
-const postStore = usePostsStore()
 
-// const categoryList = ref<string[]>([])
+const postStore = usePostsStore()
 
 
 
@@ -83,7 +84,6 @@ const getImgSrc = (mo: string) => {
   // 1. 如果没有封面图片，则返回默认图片
   // 2. 如果有封面图片，且存在资源地址，则返回对应的图片地址
   // 3. 如果有封面图片，存储在项目本身的目录下，则返回对应的图片地址
-
   return `${Config.CoverServer}${mo}.png`
 }
 
@@ -262,6 +262,10 @@ const getImgSrc = (mo: string) => {
         background-clip: text;
         color: transparent;
         transition: background 0.5s;
+
+        span {
+          color: black;
+        }
       }
 
       .articlesCard-info {
@@ -331,7 +335,8 @@ const getImgSrc = (mo: string) => {
     }
   }
 
-  /* 只新增分页样式 */
+
+
   .pagination {
     display: flex;
     justify-content: center;
@@ -339,6 +344,7 @@ const getImgSrc = (mo: string) => {
     margin: 20px 0;
     font-size: 12px;
 
+    // 分页栏的按钮
     button {
       margin: 0 10px;
       padding: 6px 12px;
@@ -355,7 +361,8 @@ const getImgSrc = (mo: string) => {
     }
 
     span {
-      font-size: 14px;
+      min-width: 60px;
+
     }
   }
 

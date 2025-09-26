@@ -1,18 +1,20 @@
 .code-block-wrapper {
+    margin: 20px auto;
     position: relative;
-    background-color: whitesmoke !important;
-    padding: 0 25px;
+    padding: 25px;
+    padding-top: 40px;
     border-radius: 10px;
     box-shadow: 2px 2px 5px #dedede,
         -2px -2px 5px #f2f0f0;
+    display: flex;
+    flex-direction: column;
 
 
     .code-block-header {
-        // position: absolute;
-        top: 0;
-        right: 10px;
-        padding: 0 10px;
-
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        font-size: 14px;
         font-weight: 600;
         color: #1c1245;
 
@@ -21,8 +23,8 @@
 
     .copy-btn {
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 5px;
+        right: 5px;
         padding: 2px 6px;
         font-size: 0.75rem;
         background: rgba(0, 0, 0, 0.2);
@@ -48,8 +50,6 @@
 
     }
 
-    // pre.hljs code .hljs-comment {
-    //     color: #377a18 !important;
-    // }
+
 
 }

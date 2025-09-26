@@ -1,9 +1,8 @@
 ---
-aside: left
+category: '编程'
 tags: ['web','centos','服务器','vitepress','vue']
 icon: 'vitepress'
-open: false
-id: 25032901
+
 cover: 'vitepress2'
 
 ---

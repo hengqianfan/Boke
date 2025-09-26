@@ -1,8 +1,11 @@
 // 文本加粗
-
-
 strong {
     font-weight: 600;
+}
+
+code {
+    padding: 0;
+    flex: 1;
 }
 
 // 列表样式 
@@ -53,9 +56,13 @@ p {
     color: #323238;
     // 正文文本的字体
     font-family: 'Inter';
+
     // 设置段落的首行缩进
-    text-indent: 2em;
-    // 注意，列表中要把缩进清除
+    // 废弃！会在各种地方产生起反效果
+    // 注意！如果使用！
+    // - 列表中要把缩进清除
+    // - 连续文本，必须在段与段再空一行
+    // text-indent: 2em;
 
 
 }
@@ -88,10 +95,23 @@ h2 {
     font-size: 26px;
     margin: 20px 0;
     margin-top: 100px;
-
     font-family: '优设标题黑';
     // 页面大纲跳转时，预留对导航栏的距离，以免被遮挡
     scroll-margin-top: 100px;
+
+    code {
+        background-color: rgba(202, 209, 215, 0.434);
+        background-color: black;
+        margin: 0 3px;
+        padding: 2px 6px;
+        border-radius: 5px;
+        color: #3451b2;
+        font-family: '优设标题黑';
+        font-size: 22px;
+        color: white;
+        // 字符间距
+        letter-spacing: 1px;
+    }
 }
 
 h3 {
@@ -129,29 +149,67 @@ p {
         font-family: '优设标题黑';
         // 字符间距
         letter-spacing: 1px;
-
     }
 }
 
-// 链接样式
+P {
 
-a {
-    margin: 0 5px;
-    font-size: 15px;
-    color: #3451b2;
-    // cursor: pointer;
+    // 链接样式
+    a {
+        margin: 0 5px;
+        font-size: 15px;
+        color: #3451b2;
 
-    text-decoration: underline;
-    text-decoration-thickness: 1px; // 下划线粗细
-    text-underline-offset: 4px; // 👈 控制下划线和文字的距离
+        text-decoration: underline;
+        text-decoration-thickness: 1px; // 下划线粗细
+        text-underline-offset: 4px; // 👈 控制下划线和文字的距离
+    }
 
+    a:hover {
+        color: #b95318;
+    }
 
 }
 
 
-a:hover {
-    color: #b95318;
+
+
+// 引用样式
+blockquote {
+    margin: 1.2em 0;
+    padding: 1em 1.5em;
+    border-left: 4px solid rgba(0, 180, 255, 0.6);
+    background: rgba(0, 180, 255, 0.1); // 冰蓝透明背景
+    border-radius: 10px;
+
+    color: #033f5e;
+
+    line-height: 1.7;
+    position: relative;
+    backdrop-filter: blur(6px); // 毛玻璃模糊
+    -webkit-backdrop-filter: blur(6px); // Safari 兼容
+
+    p {
+        margin: 0;
+        color: #2978a0 !important;
+
+    }
+
+    &>*+* {
+        margin-top: 0.6em;
+    }
 }
+
+// 引用中的 code
+blockquote code {
+    background: rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 1);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #025f88;
+}
+
 
 
 :root {
@@ -162,6 +220,7 @@ a:hover {
         padding: 8px 12px;
         text-align: left;
         font-size: 14px;
+        // background-color: white;
     }
 
     th {
@@ -169,11 +228,29 @@ a:hover {
         font-weight: 600;
     }
 
-    tr:nth-child(even) {
-        background-color: #fafafa;
+    tr {
+        background-color: aliceblue;
+
+        // b {}
+
+        code {
+            background-color: rgba(202, 209, 215, 0.434);
+            margin: 0 3px;
+            padding: 2px 6px;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #3451b2;
+            font-family: '优设标题黑';
+            // 字符间距
+            letter-spacing: 1px;
+        }
     }
 
-    tr:hover {
-        background-color: #f0f8ff;
+    tr:nth-child(even) {
+        background-color: white;
     }
+
+    // tr:hover {
+    //     background-color: #f0f8ff;
+    // }
 }

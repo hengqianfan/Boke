@@ -23,13 +23,19 @@ import MainAside from '../MainAside/index.vue'
     padding: 10px;
 
     display: flex;
-
-
-
-
+    flex-direction: row;
 
     .main-container {
         margin-top: 20px;
+    }
+
+    // 手机端（小于768px时）
+    @media (max-width: 768px) {
+        flex-direction: column; // 改成纵向排布
+
+        .main-container {
+            margin-top: 10px; // 缩小间距
+        }
     }
 }
 </style>

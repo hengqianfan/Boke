@@ -34,6 +34,12 @@ export const formatFileName = (filename: string): string => {
     return filename.slice(index + 1)   // 去掉第一个空格前的部分
 }
 
+export const getFileNameByPath = (path: string): string => {
+    return path.split('/').pop()?.replace(/\.md$/, '') || ''
+}
+
+
+
 
 export function extractTimestamp(filename: string): number {
     if (!filename) return 0
@@ -49,4 +55,19 @@ export function extractTimestamp(filename: string): number {
 
     const date = new Date(fullYear, mm, dd, hh)
     return date.getTime()
+}
+
+
+/**
+ * 格式化路径字符串
+ * @param str - 要格式化的字符串
+ */
+export function formatPath(str: string): string {
+    if (!str) return ''
+    return str.trim().replace(/\//g, ' | ')
+}
+
+export function formatPath2(str: string): string {
+    if (!str) return ''
+    return str.trim().replace(/\//g, ' ➖ ')
 }

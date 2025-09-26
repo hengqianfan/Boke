@@ -48,3 +48,89 @@
         text-indent: 0;
     }
 }
+
+
+.custom-block-danger {
+    border: 2px dashed red;
+    // background-color: #f1dfdfc8;
+    background-color: white;
+    padding: 16px;
+    border-radius: 4px;
+    margin: 16px 0;
+    transition: all 1s ease;
+
+    &:hover {
+        background-color: #eed4d78b;
+        // 背景色
+        background-color: #ffffff;
+        // 网格样式
+        background-image:
+            // 水平线
+            linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+            // 垂直线
+            linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+        // 网格间距20px 
+        background-size: 100% 20px, 20px 100%;
+
+        // 对齐起点
+        background-position: 0 0;
+
+    }
+
+    .custom-block-title {
+        font-weight: bold;
+        // margin-bottom: 8px;
+        color: #932626;
+        // 清除缩进
+        text-indent: 0;
+    }
+}
+
+
+.custom-block-tip {
+    border: 2px dashed #2d1a76;
+    // background-color: #f1dfdfc8;
+    background-color: #d9d1f3;
+    padding: 16px;
+    border-radius: 4px;
+    margin: 16px 0;
+    transition: all 1s ease;
+
+    // &:hover {
+    //     background-color: #eed4d78b;
+    //     // 背景色
+    //     background-color: #ffffff;
+    //     // 网格样式
+    //     background-image:
+    //         // 水平线
+    //         linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+    //         // 垂直线
+    //         linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    //     // 网格间距20px 
+    //     background-size: 100% 20px, 20px 100%;
+
+    //     // 对齐起点
+    //     background-position: 0 0;
+
+    // }
+
+    .custom-block-title {
+        // 布局
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 10px;
+        margin-bottom: 10px !important;
+        background-color: rgb(32, 16, 108);
+        min-width: 50px;
+
+        // 字体样式
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        color: white;
+
+
+        // 清除缩进
+        text-indent: 0;
+    }
+}

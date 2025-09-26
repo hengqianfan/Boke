@@ -1,13 +1,8 @@
 ---
-aside: left
+category: '编程'
 tags: ['修改中','pinia']
 icon: 'vitepress'
-open: true
-id: 25031901
 cover: 'vitepress'
-
-
-
 ---
  
 ######  {{ $frontmatter.id? $frontmatter.id : $frontmatter.zoid }}

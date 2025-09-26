@@ -4,6 +4,8 @@
         <MainAsidePerson />
         <!-- 当处于post文件时 -->
         <MainAsideTagsMenu v-if="route.path === '/'" />
+
+        <!-- <MainAsideToc :node="node" /> -->
     </div>
 
 </template>
@@ -11,6 +13,7 @@
 <script lang="ts" setup>
 import MainAsidePerson from '../MainAsidePerson/index.vue'
 import MainAsideTagsMenu from '../MainAsideTagsMenu/index.vue'
+import MainAsideToc from '../MainAsideToc/index.vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 

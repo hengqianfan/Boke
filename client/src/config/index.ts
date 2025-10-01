@@ -15,14 +15,15 @@ interface Config {
     AutoFormatFileName?: boolean;
     SearchDefaultKeyword: string;
     SearchEngineList: { name: string, icon: string, baseurl: string }[]
-    animationMode: 'none' | 'slide-fade'
+    animationMode: 'none' | 'slide-fade',
+    Base: string
 }
 
 
 export const Config: Config = {
     AutoFormatFileName: true,
     siteName: 'Boke',
-    PersonPortrait: `${import.meta.env.BASE_URL}/icons/logo.png`,
+    PersonPortrait: 'logo',
     PersonIntro: '拒绝内耗，先完成，再完美',
     PersonName: "衡千帆",
     animationMode: 'slide-fade',
@@ -84,8 +85,10 @@ export const Config: Config = {
             baseurl: "https://www.iciba.com/word?w="
         }
     ],
+
     OutlineTitle: '🧭 页面导航',
     OutlineShow: false,
+    Base: '/Boke/',
     IconServer: 'https://raw.githubusercontent.com/hengqianfan/nIcon/refs/heads/main/repo/',
     CoverServer: 'https://raw.githubusercontent.com/hengqianfan/nCover/refs/heads/main/repo/',
     PersonSocialLinks: [

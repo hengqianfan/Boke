@@ -1,6 +1,6 @@
 <template>
     <div class="xPerson">
-        <img :src="Config.PersonPortrait" class="xPerson-icon">
+        <img :src="getIconSrcPro(Config.PersonPortrait)" class="xPerson-icon">
 
 
         <div class="xPerson-intro">{{ Config.PersonIntro }}</div>
@@ -22,6 +22,9 @@
 <script lang="ts" setup>
 import { Config } from '@/config/index'
 import { ref, onMounted, onUnmounted } from 'vue'
+import { getIconSrcPro } from '@/tools/getUrl'
+
+
 
 
 const getSocialLinkIcon = (momo: string) => {

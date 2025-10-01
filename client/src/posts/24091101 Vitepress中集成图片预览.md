@@ -3,16 +3,12 @@ category: '编程'
 tags: ['vitepress','vue','medium-zoom']
 icon: 'vitepress'
 cover: 'vitepress'
-
-
 ---
 
 
- 
 <br/>
 
 # vitepress 中集成图片预览
-
 
 
 ## 1. 使用 medium-zoom 实现

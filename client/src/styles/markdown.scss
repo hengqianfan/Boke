@@ -70,7 +70,20 @@ p {
 hr {
     border: none;
     height: 2px;
-    margin: 24px 0;
+    margin: 80px 0;
+    background: repeating-linear-gradient(to right,
+            transparent 0,
+            transparent 2px,
+            #ccc 10px,
+            #ccc 20px);
+    mask-image: linear-gradient(to right, transparent, black 40%, black 60%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 40%, black 60%, transparent);
+}
+
+.hr-head {
+    border: none;
+    height: 2px;
+    margin: 20px 0;
     background: repeating-linear-gradient(to right,
             transparent 0,
             transparent 2px,
@@ -88,13 +101,13 @@ h1 {
     margin: 30px 0;
     text-align: center;
     font-family: '优设标题黑';
-    // background-color: rebeccapurple;
+
 }
 
 h2 {
     font-size: 26px;
     margin: 20px 0;
-    margin-top: 100px;
+    // margin-top: 100px;
     font-family: '优设标题黑';
     // 页面大纲跳转时，预留对导航栏的距离，以免被遮挡
     scroll-margin-top: 100px;
@@ -117,7 +130,7 @@ h2 {
 h3 {
     font-size: 22px;
     margin: 20px 0;
-    margin-top: 50px;
+    // margin-top: 50px;
 
     // margin-top: 100px;
     // text-align: center;
@@ -125,12 +138,26 @@ h3 {
     // color: rebeccapurple;
     // 页面大纲跳转时，预留对导航栏的距离，以免被遮挡
     scroll-margin-top: 100px;
+
+    code {
+        background-color: rgba(202, 209, 215, 0.434);
+        background-color: black;
+        margin: 0 3px;
+        padding: 2px 6px;
+        border-radius: 5px;
+        color: #3451b2;
+        font-family: '优设标题黑';
+        font-size: 22px;
+        color: white;
+        // 字符间距
+        letter-spacing: 1px;
+    }
 }
 
 h4 {
     font-size: 18px;
     margin: 20px 0;
-    margin-top: 50px;
+    // margin-top: 50px;
     color: #323238;
     font-family: '优设标题黑';
     // 页面大纲跳转时，预留对导航栏的距离，以免被遮挡
@@ -229,9 +256,9 @@ blockquote code {
     }
 
     tr {
-        background-color: aliceblue;
+        // 行样式
+        background-color: rgb(240, 243, 245);
 
-        // b {}
 
         code {
             background-color: rgba(202, 209, 215, 0.434);

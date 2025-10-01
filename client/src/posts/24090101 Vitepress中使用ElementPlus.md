@@ -1,74 +1,50 @@
 ---
 category: '编程'
-tags: ['vitepress','elementPlus','vue']
+tags: ['vitepress','elementplus','vue']
 icon: 'vitepress'
 cover: 'vitepress'
+---
+
+!img[ElementPlus](elementplus)
+
+
+> **ElementPlus** 是 **vue** 生态中非常出名的组件库，实际开发中会用来了开发一些后端管理页面。  
+> `ElementPlus官网` :  https://element-plus.org/zh-CN/ 🔥
+
+<br/>
+
+> **下面提供两种方案:**    
+> ① 集成图标  
+> ② 不集成图标  
 
 ---
 
 
-
-<br/>
-
-# vitepress 中使用 ElementPlus
-
-
-`ElementPlus官网` :  https://element-plus.org/zh-CN/
-
-
 ## 1. 不使用配套图标
 
-::: warning <Badge type='warning'>提示</Badge>
+::: info 提示💡
 
-**如果你对 ElementPlus 不太熟悉，可以不安装图标，然后注意查看说明版代码**
+**如果你对 `ElementPlus` 不太熟悉，可以不安装图标，然后注意查看代码注释**
 
 :::
 
 ### 1.1 安装 element-plus
 
-::: code-group
+> 安装依赖包
 
 ```shell [npm]
 npm install element-plus --save
 ```
 
-```shell [yarn]
-yarn add element-plus
-```
-
-```shell [pnpm]
-pnpm install element-plus
-```
-
-:::
 
 ### 1.2. 配置代码 
 
-
-
-
----
+> 找到 vitepress 项目的配置文件，然后修改对应代码：
 
 **配置文件**： `docs/.vitepress/theme/index.js` 👈    
 
-::: code-group
 
-```js:line-numbers{3,4,8} [纯净版]
-import { h } from 'vue'
-import DefaultTheme from 'vitepress/theme'
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
-export default {
-  extends: DefaultTheme,
-  enhanceApp({ app }) {
-    app.use(ElementPlus)
-  },
-}
-```
-
-
-
-```js{3-6,10-11} [说明版]
+```js [说明版]
 import { h } from 'vue'
 import DefaultTheme from 'vitepress/theme'
 // ⭐1. 导入 elementplus 
@@ -84,12 +60,10 @@ export default {
 }
 ```
 
-:::
-
 
 ### 1.3 使用
 
-- 因为全局注册，你可以直接在项目中的 `vue` 文件中使用
+**因为全局注册，你可以直接在项目中的 `vue` 文件中使用**
 
  
 <br/>
@@ -107,69 +81,19 @@ export default {
 
 - **安装 element-plus** 
 
-::: code-group
-
 ```shell [npm]
 npm install element-plus --save
 ```
 
-```shell [yarn]
-yarn add element-plus
-```
-
-```shell [pnpm]
-pnpm install element-plus
-```
-
-:::
-
-
 - **安装 图标依赖** <Badge type='danger'>注意图标是单独的包，所以要另外安装它</Badge>  
-
-::: code-group
 
 ```shell [npm]
 npm install @element-plus/icons-vue
 ```
 
-```shell [yarn]
-yarn add @element-plus/icons-vue
-```
-
-```shell [pnpm]
-pnpm install @element-plus/icons-vue
-```
-
-:::
-
 ### 2.2 配置代码 
 
-
----
-
-::: code-group
-
-```js [纯净版]
-import { h } from 'vue'
-import DefaultTheme from 'vitepress/theme'
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-export default {
-  extends: DefaultTheme,
-  enhanceApp({ app }) {
-    app.use(ElementPlus)
-    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-      app.component(key, component)
-    }
-  },
-}
-```
-
-
-
-
-```js:line-numbers{7-8,14-16} [说明版]
+```js [说明版]
 import { h } from 'vue'
 import DefaultTheme from 'vitepress/theme'
 //  1. 导入 elementplus 
@@ -191,7 +115,7 @@ export default {
 }
 ```
 
-:::
+
 
 
 

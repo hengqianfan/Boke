@@ -9,8 +9,6 @@ const routes = [
   {
     path: '/post/:slug',
     component: () => import('@/components/MainDoc/index.vue'),
-
-
     props: true,
     // meta: {}
   },
@@ -29,7 +27,8 @@ const routes = [
   },
   {
     path: '/notes/:top/:sub*',
-    component: () => import('@/components/MainDoc/index.vue')
+    component: () => import('@/components/MainDoc/index.vue'),
+    props: true
     // component: () => import('@/pages/NoteDetail.vue')
 
   }

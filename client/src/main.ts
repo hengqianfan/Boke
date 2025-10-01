@@ -5,6 +5,8 @@ import router from './router'
 import { Config } from '@/config'
 import MyImage from '@/components/MarkdownImg/index.vue'
 import MyCardPost from '@/components/CardPost/index.vue'
+import MarkdownMermaid from '@/components/MarkdownMermaid/index.vue'
+
 // 引入 highlight.js 的样式
 // 注意，有很多主题
 import 'highlight.js/styles/github.css'
@@ -28,6 +30,8 @@ const app = createApp(App)
 app.component('MyImage', MyImage)
 // 文章卡片
 app.component('MyCardPost', MyCardPost)
+// 流程图组件
+app.component('MyMermaid', MarkdownMermaid)
 
 app.use(createPinia())
 app.use(router)

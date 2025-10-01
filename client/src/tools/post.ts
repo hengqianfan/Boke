@@ -3,7 +3,6 @@ import { countWords, countReadingTime } from '@/tools/count'
 import { formatFileName, extractTimestamp } from '@/tools/format'
 import { Config } from '@/config'
 import { createMarkdown } from '@/tools/markdown'
-
 import type { Post, PostMeta, OutlineHeading, AllPostsMeta } from '@/types/post'
 
 // 动态导入 posts 文件夹下所有 md（返回 raw 文本）
@@ -11,6 +10,7 @@ const modules = import.meta.glob('../posts/*.md', {
     import: 'default',
     query: '?raw',
 }) as Record<string, () => Promise<string>>
+
 
 /** 按 slug 动态加载文章 */
 export async function getPostBySlug(fileName: string): Promise<Post | null> {
@@ -30,7 +30,7 @@ export async function getPostBySlug(fileName: string): Promise<Post | null> {
     // 
     let fileNameByFormat: string = fileName
 
-    let fileTime: number = parsed.attributes.date ? new Date(parsed.attributes.date).getTime() : 0
+    let fileTime: number | undefined = parsed.attributes.date ? new Date(parsed.attributes.date).getTime() : 0
 
 
     if (Config.AutoFormatFileName) {
@@ -41,7 +41,7 @@ export async function getPostBySlug(fileName: string): Promise<Post | null> {
     const meta: PostMeta = {
         slug: fileName,
         title: parsed.attributes.title ?? formatFileName(fileName || ''),
-        date: fileTime,
+        date: fileTime ? fileTime : 0,
         tags: parsed.attributes.tags,
         cover: parsed.attributes.cover,
         pin: parsed.attributes.pin ?? 0,
@@ -64,7 +64,7 @@ export async function getAllPostsMeta(): Promise<AllPostsMeta> {
         const content = parsed.body.trim()
 
         let fileNameByFormat: string = slug
-        let fileTime: number = parsed.attributes.date ? new Date(parsed.attributes.date).getTime() : 0
+        let fileTime: number | undefined = parsed.attributes.date ? new Date(parsed.attributes.date).getTime() : 0
 
 
         if (Config.AutoFormatFileName) {
@@ -75,7 +75,7 @@ export async function getAllPostsMeta(): Promise<AllPostsMeta> {
         const meta: PostMeta = {
             slug,
             title: parsed.attributes.title ?? fileNameByFormat,
-            date: fileTime,
+            date: fileTime ? fileTime : 1758987231768,
             pin: parsed.attributes.pin ?? 0,
             tags: parsed.attributes.tags ?? [],
             category: parsed.attributes.category ?? '未知',

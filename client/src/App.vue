@@ -7,9 +7,18 @@ import Banner from './components/Banner/index.vue'
 // 初始化配置
 import { usePostsStore } from './stores/posts'
 const postStore = usePostsStore()
+
+import mermaid from 'mermaid'
+
+
+
 // 初始化文章数据
 onMounted(async () => {
   postStore.fetchPosts()
+  // 只在浏览器执行
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' })
+  }
 })
 
 </script>

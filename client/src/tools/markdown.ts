@@ -5,6 +5,9 @@ import container from 'markdown-it-container'
 import anchor from 'markdown-it-anchor'
 import mdCard from "./markdown-card";
 import mdImg from "./markdown-img";
+import markdownItMermaid from './markdown-mermaid'
+
+
 
 export interface Heading {
     level: number
@@ -65,6 +68,8 @@ export function createMarkdown() {
     // 注册自定义语法、组件 !img[]()
     md.use(mdImg);
     md.use(mdCard)
+    // 注册插件
+    // md.use(markdownItMermaid)
 
 
 
@@ -155,7 +160,7 @@ export function createMarkdown() {
             // 'href', 'target', 'rel' 防止链接语法失效
             // 'data-code' 防止代码块实现
             ADD_ATTR: ['href', 'target', 'rel', 'data-code'],
-            ADD_TAGS: ['MyImage']
+            ADD_TAGS: ['MyImage', 'MyMermaid']
         })
         return { html: safeHtml, headings }
     }

@@ -4,12 +4,6 @@ tags: ['vitepress','mermaid','vue']
 icon: 'vitepress'
 cover: 'vitepress'
 ---
- 
-
- 
-<br/>
- 
-# vitepress 中使用 mermaid 流程图
 
 ## 原文参考
 
@@ -24,33 +18,39 @@ cover: 'vitepress'
 👆
 **建议先看原文，看不懂，或者迷惑了再看下文，因为本文比较啰嗦**
 
+---
+
 ## 0. 前置基础
 
-::: details 你可能需掌握的知识
+::: info  你可能需掌握的知识?
+
 - 掌握基本的 es6 语法
 - 会，或者想用 markdown 语法来实现流程图
 - 了解基本的vue组件知识
+
 :::
 
 ## 1. 实现方式
 
 
 ::: info
-🔘 **vitepress** 是基于 `markdown-it` 实现的MD代码样式的渲染，所以可以通过编写插件的方式引入与集成 `mermaid` 来实现流程图的功能。  
+🔘 **vitepress** 是基于 `markdown-it` 实现的MD代码样式的渲染，所以可以通过编写自定义语法插件的方式引入与集成 `mermaid` 来实现流程图的功能。  
 🔘 **mermaid** 简而言之，是 `markdown` 的一种扩展语法  
 
 :::
 
 <br/>
 
-<Badge type='info'>本文的实现思路</Badge>  
+本文的实现思路
 
 <br/>
 
 <br/>
 
 
-```mermaid
+
+```smermaid
+
 ---
 title: 实现流程
 ---
@@ -60,8 +60,10 @@ flowchart LR
   B -->|注册组件| D[theme/index.js] 
   E([安装mermaid])
   E --> |提供流程图支持|A
+
 ```
-<br/>
+
+
 
 
 

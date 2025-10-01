@@ -8,7 +8,7 @@ interface Site {
     classTwo?: string;
     tags?: string[];
     priority?: number;
-    pin?: boolean;
+    pin?: number;
     star?: boolean;
     index?: number;
 }
@@ -1549,7 +1549,15 @@ export const sites: Site[] = [
         desc: "网址合集导航项目",
         classOne: "常用网址",
         classTwo: "本地项目调试"
-    }
+    },
+    {
+        name: "指尖工具箱",
+        url: "https://getquicker.net/",
+        icon: "tool",
+        desc: "聚合工具网址",
+        classOne: "软件工具",
+        classTwo: "工具网站"
+    },
 
 
 ]

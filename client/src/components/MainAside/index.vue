@@ -6,6 +6,9 @@
         <MainAsideTagsMenu v-if="route.path === '/'" />
 
         <!-- <MainAsideToc :node="node" /> -->
+
+        <!-- <Outline :headings="headings" /> -->
+
     </div>
 
 </template>
@@ -13,9 +16,11 @@
 <script lang="ts" setup>
 import MainAsidePerson from '../MainAsidePerson/index.vue'
 import MainAsideTagsMenu from '../MainAsideTagsMenu/index.vue'
-import MainAsideToc from '../MainAsideToc/index.vue'
+import Outline from '../Outline/index.vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
+
+
 
 
 </script>

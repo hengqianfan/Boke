@@ -1,25 +1,17 @@
 ---
 category: '编程'
-
 tags: ['vitepress','vue']
 icon: 'vitepress'
 cover: 'vitepress'
-
-
 ---
- 
-###### 24100402
- 
-<br/>
- 
-# vitepress 代码组增加图标
+
+
 
 ## 1. 说明
 
 ::: details 参考文章
 
 https://vpgi.vercel.app/getting-started.html  
-
 
 ::: 
 

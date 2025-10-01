@@ -40,11 +40,17 @@ export const getFileNameByPath = (path: string): string => {
 
 
 
-
-export function extractTimestamp(filename: string): number {
+/**
+ *
+ *
+ * @export 这是默认处理25121501这样约定格式的文件名的函数
+ * @param {string} filename
+ * @return {*}  {number}
+ */
+export function extractTimestamp(filename: string): number | undefined {
     if (!filename) return 0
     const firstPart = filename.split(' ')[0]  // 获取空格前部分
-    if (!/^\d{8}$/.test(firstPart)) return 0  // 不是8位数字则返回 null
+    if (!/^\d{8}$/.test(firstPart)) return undefined  // 不是8位数字则返回 null
 
     const yy = Number(firstPart.slice(0, 2))
     const mm = Number(firstPart.slice(2, 4)) - 1  // JS 月份0-11

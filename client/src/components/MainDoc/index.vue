@@ -43,7 +43,7 @@
             </div>
 
 
-            <hr />
+            <hr class="hr-head" />
 
             <!-- 正文 -->
             <article class="markdown-body" v-html="doc?.html"></article>

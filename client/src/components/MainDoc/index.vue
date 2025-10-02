@@ -29,7 +29,7 @@
             <!-- 顶部目录栏 -->
             <div class="toc" v-if="docType === 'note'" @mouseenter="isTocOpen = true" @mouseleave="isTocOpen = false">
                 <button class="toc-toggle">{{ isTocOpen ? '📥 知识库目录' : `当前位置：${formatPath2(doc?.path || '')}`
-                }}</button>
+                    }}</button>
                 <div v-if="isTocOpen" class="toc-list">
 
                     <div class="toc-list-title">📥 知识库目录</div>
@@ -60,7 +60,6 @@
 <script setup lang="ts">
 import { ref, watch, nextTick, createApp, onUnmounted } from "vue"
 import { useRoute, useRouter } from "vue-router"
-
 import { Config } from "@/config"
 import { formatDate_timestamp } from "@/tools/format"
 import { formatPath2 } from "@/tools/format"

@@ -4,14 +4,9 @@ tags: ['修改中','Navidrome','音乐']
 icon: 'navidrome'
 cover: 'navidrome'
 
-
 --- 
- 
-######  {{ $frontmatter.id? $frontmatter.id : $frontmatter.zoid }}
- 
-<br/>
- 
-# Navidrome自建音乐服务器
+
+
 
 官网： https://www.navidrome.org/
 

@@ -4,7 +4,7 @@ import { type NoteOutlineHeading } from '@/types/note'
 import { getFileNameByPath } from './format'
 
 // 导入 notes 下所有 md 文件（递归）
-const files = import.meta.glob('../notes/**/*.md', { eager: true, as: 'raw' })
+const files = import.meta.glob('../notes/**/*.md', { eager: true, query: '?raw', import: 'default' })
 
 export interface NoteMeta {
     title?: string

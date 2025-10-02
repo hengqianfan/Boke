@@ -10,7 +10,7 @@ const routes = [
     path: '/post/:slug',
     component: () => import('@/components/MainDoc/index.vue'),
     props: true,
-    // meta: {}
+
   },
   {
     path: '/about',
@@ -29,15 +29,14 @@ const routes = [
     path: '/notes/:top/:sub*',
     component: () => import('@/components/MainDoc/index.vue'),
     props: true
-    // component: () => import('@/pages/NoteDetail.vue')
-
   }
 
 ]
 
 export default createRouter({
-  // history: createWebHistory(),
+
   // 一定要加上 BASE_URL，否则部署到非根路径时会出错
+
   history: createWebHistory(import.meta.env.BASE_URL),
 
   routes

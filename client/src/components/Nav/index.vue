@@ -17,7 +17,7 @@
             <!-- <a href="https://hengqianfan.github.io/xSites/" class="nav-menu-item">网站</a> -->
             <!-- <router-link to="/life" class="nav-menu-item">动态</router-link> -->
             <!-- <router-link to="/life" class="nav-menu-item">专题</router-link> -->
-            <router-link to="/post/about" class="nav-menu-item">关于</router-link>
+            <router-link to="/post/about" class="nav-menu-item">关于本站</router-link>
 
         </div>
 

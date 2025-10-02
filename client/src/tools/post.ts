@@ -14,20 +14,26 @@ const modules = import.meta.glob('../posts/*.md', {
 
 /** 按 slug 动态加载文章 */
 export async function getPostBySlug(fileName: string): Promise<Post | null> {
+    // 获取具体的文件名
     const key = `../posts/${fileName}.md`
+    // 加载文章
     const loader = modules[key]
+    // 不存在时,返回空
     if (!loader) return null
-
+    // 获取原生数据
     const raw = await loader()
+    // 通过 front-matter 处理数据
     const parsed = fm<PostMeta>(raw)
+    // 提取文章正文内容
     const content = parsed.body.trim()
-
+    // 根据正文统计文章字数
     const wordCount = countWords(content)
-
     // 使用统一 markdown 渲染
-    const { render, headings } = createMarkdown()
-    const { html } = render(content)
     // 
+    const { render, headings } = createMarkdown()
+
+    const { html } = render(content)
+    // 定义格式化的文件名
     let fileNameByFormat: string = fileName
 
     let fileTime: number | undefined = parsed.attributes.date ? new Date(parsed.attributes.date).getTime() : 0
@@ -35,7 +41,9 @@ export async function getPostBySlug(fileName: string): Promise<Post | null> {
 
     if (Config.AutoFormatFileName) {
         fileNameByFormat = formatFileName(fileName)
-        fileTime = extractTimestamp(fileName)
+        if (!parsed.attributes.date) {
+            fileTime = extractTimestamp(fileName)
+        }
     }
 
     const meta: PostMeta = {

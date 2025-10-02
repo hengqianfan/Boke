@@ -4,13 +4,8 @@ tags: ['vitepress','vue']
 icon: 'vitepress'
 cover: 'vitepress'
 ---
- 
-######  {{ $frontmatter.id? $frontmatter.id : $frontmatter.zoid }}
- 
-<br/>
 
-# Vitepress中使用JS跳转页面
- 
+
 ## 使用 useRouter 钩子
 
 VitePress 提供 useRouter 钩子获取路由实例，支持 SPA 风格的无刷新跳转。

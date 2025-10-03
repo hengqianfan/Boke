@@ -48,12 +48,17 @@
             <!-- 正文 -->
             <article class="markdown-body" v-html="doc?.html"></article>
 
-            <!-- 大纲 -->
-
+            <!-- <div>
+                <MdEditor :model-value="doc?.raw" @update:modelValue="val => { if (doc) doc.raw = val }" />
+            </div> -->
         </div>
 
     </div>
-    <Outline :headings="outline || []" />
+
+
+
+
+
 
 </template>
 
@@ -68,6 +73,8 @@ import { getAllNotes, getArticleByPath, type Note, type NoteFile, generateToc } 
 
 import Outline from "@/components/Outline/index.vue"
 import MyImage from "@/components/MarkdownImg/index.vue"
+import { MdEditor } from 'md-editor-v3';
+import 'md-editor-v3/lib/style.css';
 import CardPost from "@/components/CardPost/index.vue"
 import { usePostsStore } from "@/stores/posts"
 
@@ -78,18 +85,22 @@ const router = useRouter()
 const postStore = usePostsStore()
 
 
-
 // --- 核心状态 ---
 const docType = ref<DocType>("post") // 当前文档类型
 const doc = ref<any>(null)           // 当前文章或笔记文件
 const note = ref<Note | null>(null)  // 笔记模式时当前笔记本
-const outline = ref<any[]>([])
+
 const isTocOpen = ref(false)
 // 锁文逻辑
 const correctPassword = ref<string>('momo')
 // 新增：锁状态
 const isLocked = ref(true)
 const inputPassword = ref("")
+
+
+import { useOutlineStore } from "@/stores/outline"
+
+const outlineStore = useOutlineStore()
 
 
 
@@ -167,7 +178,7 @@ watch(
         // 处理 html
         if (doc.value) {
             doc.value.html = processArticleHtml(doc.value.html)
-            outline.value = generateToc(doc.value.html)
+            // outline.value = generateToc(doc.value.html)
         }
 
         // 文章上锁
@@ -223,6 +234,14 @@ watch(
                 app.mount(el)
             }
         })
+
+        if (doc.value) {
+            doc.value.html = processArticleHtml(doc.value.html)
+            const toc = generateToc(doc.value.html)
+            outlineStore.setOutline(toc) // ✅ 存到 pinia
+        }
+
+
     },
     { immediate: true }
 )
@@ -232,7 +251,17 @@ onUnmounted(() => {
     if (container && handleClick) {
         container.removeEventListener("click", handleClick)
     }
+    // 离开时，清空大纲
+    outlineStore.clearOutline()
+
+
 })
+
+
+onUnmounted(() => {
+})
+
+
 </script>
 
 <style scoped lang="scss">

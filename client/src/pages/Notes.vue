@@ -20,11 +20,12 @@
 <script setup lang="ts">
 import { getAllNotes, type Note } from '@/tools/notes';
 import { getCoverSrc } from '@/tools/getUrl';
-
 import { useRouter } from 'vue-router';
+import { useAsideStore } from '@/stores/aside';
+import { onMounted } from 'vue';
 
 
-
+const aside = useAsideStore()
 const notes = getAllNotes();
 
 // 数字置顶排序：top 数字大在前，其次按文章数量排序
@@ -46,6 +47,11 @@ function goToNote(note: Note) {
         router.push(note.path); // 没有文章则跳到笔记根路径
     }
 }
+
+
+onMounted(() => {
+    // aside.setAsideShow(false)
+})
 
 
 </script>

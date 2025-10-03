@@ -86,7 +86,7 @@ export const Config: Config = {
         }
     ],
 
-    OutlineTitle: '🧭 页面导航',
+    OutlineTitle: '页面导航',
     OutlineShow: false,
     Base: '/Boke/',
     IconServer: 'https://raw.githubusercontent.com/hengqianfan/nIcon/refs/heads/main/repo/',

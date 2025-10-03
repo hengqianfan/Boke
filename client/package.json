@@ -21,6 +21,7 @@
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-container": "^4.0.0",
     "markdown-it-mermaid": "^0.2.5",
+    "md-editor-v3": "^6.0.1",
     "mermaid": "^11.12.0",
     "pinia": "^3.0.3",
     "sass": "^1.92.1",

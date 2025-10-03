@@ -110,6 +110,7 @@ const getIconUrl = (icon: string) => {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin: 0 auto;
 
     // 清除链接样式 (因为存在全局的链接样式)
     a {

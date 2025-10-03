@@ -94,8 +94,11 @@ function getToday() {
     background-color: white;
 
 
-    box-shadow: 5px 5px 18px #dedede,
-        -5px -5px 18px #ffffff;
+    // box-shadow: 5px 5px 18px #dedede,
+    //     -5px -5px 18px #ffffff;
+
+    box-shadow: 5px 5px 18px #e0dcdc,
+        -5px -5px 18px #eeeaea;
 
     padding: 10px 0;
 

@@ -7,7 +7,7 @@
 
         <!-- <MainAsideToc :node="node" /> -->
 
-        <!-- <Outline :headings="headings" /> -->
+        <Outline v-if="route.path.startsWith('/post/') || route.path.startsWith('/notes/')" />
 
     </div>
 
@@ -29,11 +29,15 @@ const route = useRoute()
 .main-aside-all {
     width: 25%;
     max-height: 90vh;
-    // background-color: aqua;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px 10px;
+
+    // 让侧边栏吸附，放在随视图组件，例如正文的滑动而滑动
+    position: sticky;
+    top: 80px;
 
 }
 </style>

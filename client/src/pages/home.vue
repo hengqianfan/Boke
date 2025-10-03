@@ -67,17 +67,18 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import { formatDate_timestamp } from '@/tools/format'
-
 import { Config } from '@/config';
 
 import { usePostsStore } from '@/stores/posts'
 import { useThemeStore } from '@/stores/theme'
 const themeStore = useThemeStore()
+import { useAsideStore } from '@/stores/aside';
 
 const postStore = usePostsStore()
 
-
+const aside = useAsideStore()
 
 
 const getImgSrc = (mo: string) => {
@@ -87,7 +88,9 @@ const getImgSrc = (mo: string) => {
   return `${Config.CoverServer}${mo}.png`
 }
 
-
+onMounted(() => {
+  aside.setAsideShow(true)
+})
 
 
 </script>

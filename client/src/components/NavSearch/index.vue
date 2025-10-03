@@ -75,12 +75,13 @@ const toSearch = () => {
         position: relative; // 关键：菜单相对定位
         width: 20px;
         height: 20px;
+        padding: 10px;
         border-radius: 10px;
         background-color: white;
         display: flex;
         justify-content: center;
         align-items: center;
-        box-shadow: 1px 1px 2px #dedede, -1px -1px 2px #f5f0f0;
+        // box-shadow: 1px 1px 2px #dedede, -1px -1px 2px #f5f0f0;
         cursor: pointer;
 
         .mas-engine-menu {
@@ -95,9 +96,10 @@ const toSearch = () => {
             box-shadow: 1px 1px 3px #dedede, -1px -1px 3px #f5f0f0;
 
             .mas-engine-menu-icon {
-                width: 30px;
-                height: 30px;
-                margin: 5px;
+                width: 40px;
+                height: 40px;
+                // margin: 5px;
+                padding: 5px;
                 display: flex;
                 justify-content: center;
                 align-items: center;

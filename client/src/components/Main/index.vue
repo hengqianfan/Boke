@@ -1,7 +1,7 @@
 <template>
     <div class="main-all">
 
-        <MainAside />
+        <MainAside v-if="aside.asideShow" />
 
         <router-view class="main-container" />
     </div>
@@ -9,6 +9,15 @@
 
 <script lang="ts" setup>
 import MainAside from '../MainAside/index.vue'
+import { useRoute } from 'vue-router'
+import { useAsideStore } from '@/stores/aside'
+
+const route = useRoute()
+
+const aside = useAsideStore()
+
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -25,8 +34,12 @@ import MainAside from '../MainAside/index.vue'
     display: flex;
     flex-direction: row;
 
+
+
+
     .main-container {
         margin-top: 20px;
+
     }
 
     // 手机端（小于768px时）

@@ -1,0 +1,20 @@
+.main-all {
+    width: 90%;
+    height: 100%;
+
+    // 预留导航栏位置
+    // 因为添加了baner，所以不需要预留导航栏位置
+    // padding-top: 70px;
+
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+
+    .main-container {
+        margin-top: 20px;
+
+    }
+
+
+}

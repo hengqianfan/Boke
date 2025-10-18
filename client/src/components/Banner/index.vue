@@ -10,20 +10,8 @@
 </script>
 
 <style lang="scss" scoped>
-.Banner-all {
-    width: 100%;
-    height: 60vh;
-    // background-color: rebeccapurple;
-
-    .Banner-img {
-        width: 100%;
-        height: 100%;
-        // 保持图片比例，图片不变形
-        object-fit: cover;
-        // 截取图片上部分
-        object-position: top;
-
-
-    }
-}
+// PC 样式
+@use './pc.scss';
+// 移动端样式优化
+@use './app.scss';
 </style>

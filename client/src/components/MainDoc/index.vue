@@ -29,7 +29,7 @@
             <!-- 顶部目录栏 -->
             <div class="toc" v-if="docType === 'note'" @mouseenter="isTocOpen = true" @mouseleave="isTocOpen = false">
                 <button class="toc-toggle">{{ isTocOpen ? '📥 知识库目录' : `当前位置：${formatPath2(doc?.path || '')}`
-                    }}</button>
+                }}</button>
                 <div v-if="isTocOpen" class="toc-list">
 
                     <div class="toc-list-title">📥 知识库目录</div>
@@ -73,16 +73,24 @@ import { getAllNotes, getArticleByPath, type Note, type NoteFile, generateToc } 
 
 import Outline from "@/components/Outline/index.vue"
 import MyImage from "@/components/MarkdownImg/index.vue"
+
+
+import MyLinkWindow from "@/components/MarkdownLink/index.vue"
+
 import { MdEditor } from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import CardPost from "@/components/CardPost/index.vue"
 import { usePostsStore } from "@/stores/posts"
+import { useMainStore } from "@/stores/main"
+
+
 
 type DocType = "post" | "note"
 
 const route = useRoute()
 const router = useRouter()
 const postStore = usePostsStore()
+const main = useMainStore()
 
 
 // --- 核心状态 ---
@@ -159,6 +167,8 @@ let handleClick: ((e: Event) => void) | null = null
 watch(
     () => route.path,
     async (path) => {
+        // 每次切换文章时，显示侧边栏
+        main.setAsideShow(true)
         // 判断是 post 还是 note
         if (path.startsWith("/notes/")) {
             docType.value = "note"
@@ -226,10 +236,21 @@ watch(
             app.mount(el)
         })
 
+        document.querySelectorAll<HTMLDivElement>(".md-link").forEach(el => {
+            const src = el.dataset.src || ""
+            const desc = el.dataset.desc || ""
+            const icon = el.dataset.icon || ''
+            const app = createApp(MyLinkWindow, { src, desc, icon })
+            app.mount(el)
+        })
+
+
+
+
         document.querySelectorAll<HTMLDivElement>(".md-card").forEach(el => {
             const type = el.dataset.type
             const slug = el.dataset.slug || ""
-            if (type === "post") {
+            if (type === "post" || type === "note") {
                 const app = createApp(CardPost, { slug })
                 app.mount(el)
             }
@@ -253,7 +274,6 @@ onUnmounted(() => {
     }
     // 离开时，清空大纲
     outlineStore.clearOutline()
-
 
 })
 
@@ -303,7 +323,7 @@ onUnmounted(() => {
     width: 100%;
     min-height: 80vh;
     padding: 20px;
-    border: 2px solid #eee;
+    // border: 2px solid #eee;
     position: relative;
     padding-bottom: 30vh;
 
@@ -407,6 +427,120 @@ onUnmounted(() => {
 
     article {
         line-height: 1.8;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .doc-detail {
+        width: 100%;
+        min-height: 100vh;
+        padding: 0px;
+        // border: 2px solid #eee;
+        position: relative;
+        padding-bottom: 30vh;
+
+        .doc-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 1rem;
+
+            div {
+                padding: 6px 8px;
+                border-radius: 6px;
+                font-size: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+            }
+
+            .doc-time {
+                background: #ea8c2f;
+                color: #fff;
+            }
+
+            .doc-wordCount {
+                background: #000;
+                color: #fff;
+                font-size: 10px;
+            }
+
+            .doc-tag {
+                background: #7ba5ca;
+                color: #fff;
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &:hover {
+                    background: #5d87ac;
+                }
+            }
+        }
+
+        .toc {
+            position: relative;
+            margin-bottom: 1.5rem;
+            // min-width: 500px;
+            transition: all 0.6s ease;
+
+            .toc-toggle {
+
+                background: #f5f5f5;
+                border: none;
+                font-size: 14px;
+                padding: 0.5rem 1rem;
+                border-radius: 6px;
+                color: #5b5555;
+
+            }
+
+            .toc-list {
+                // width: 100%;
+
+                position: absolute;
+                // margin-top: 10px;
+                top: 0px;
+                left: 0;
+                background: #fff;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 0.5rem 1rem;
+                z-index: 100;
+                max-height: 50vh;
+                overflow-y: auto;
+
+                .toc-list-title {
+                    margin: 20px 0;
+                }
+
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                li {
+                    margin: 6px 0;
+                }
+
+                a {
+                    text-decoration: none;
+                    color: #1b2b36;
+
+                    &:hover {
+                        text-decoration: underline;
+                        color: #e38383;
+                    }
+                }
+            }
+        }
+
+        article {
+            line-height: 1.8;
+        }
     }
 }
 </style>

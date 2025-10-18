@@ -44,6 +44,8 @@ export default function mdImg(md: MarkdownIt) {
         const token = tokens[idx];
         const src = token.attrGet("data-src");
         const alt = token.attrGet("data-alt");
+        // return `<div class="md-img" data-src="${src}" data-alt="${alt}"></div>`;
         return `<div class="md-img" data-src="${src}" data-alt="${alt}"></div>`;
+
     };
 }

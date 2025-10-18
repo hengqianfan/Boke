@@ -4,6 +4,8 @@ import { ref, onMounted } from 'vue'
 import xNav from './components/Nav/index.vue'
 import xMain from './components/Main/index.vue'
 import Banner from './components/Banner/index.vue'
+import BackTop from './components/BackTop/index.vue'
+
 // 初始化配置
 import { usePostsStore } from './stores/posts'
 const postStore = usePostsStore()
@@ -28,14 +30,18 @@ onMounted(async () => {
     <xNav />
     <Banner />
     <xMain />
+    <BackTop />
   </div>
 </template>
 
 
 
 <style lang="scss" scoped>
+@use './styles/vars.scss' as *;
+
 .app-all {
   width: 100%;
+  background-color: $bg-color-light;
   // 高度撑满屏幕，但不能写死
   min-height: 100vh;
   display: flex;

@@ -1,0 +1,16 @@
+@media screen and (max-width: 600px) {
+
+    .main-aside-all {
+        width: 100%;
+        max-height: 90vh;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0px;
+        // 在移动端取消吸附效果
+        position: relative;
+        top: 80px;
+        margin-bottom: 50px;
+    }
+}

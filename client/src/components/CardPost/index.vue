@@ -17,7 +17,7 @@ const props = defineProps(['xSrc', 'xTitle', 'xUrl'])
     <div class="cp-all">
         <img :src="getCoverSrc(post?.meta.cover || 'momo')" alt="" class="cp-cover" />
 
-        <a class="cp-title" :href="post?.meta.title || '未知'" target="_blank">{{ post?.meta.title || '未知'}} </a>
+        <a class="cp-title" :href="props.slug" target="_blank">{{ post?.meta.title || '未知' }} </a>
     </div>
 </template>
 
@@ -35,12 +35,13 @@ const props = defineProps<{ slug: string }>()
 const post = ref<Post | null>(null)
 
 onMounted(async () => {
-
     post.value = await getPostBySlug(props.slug)
-
-
-
 })
+
+
+
+
+
 </script>
 
 

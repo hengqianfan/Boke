@@ -29,13 +29,16 @@ const ShowPreview = ref(false)
 
 <style scoped lang="scss">
 .my-image {
-    width: 50vw;
+    // width: 60vw;
     text-align: center;
     margin: 10px auto;
 
+    // max-height: 300px;
+
     img {
-        width: 100%;
-        padding: 10px;
+        // width: 100%;
+        max-height: 400px;
+        padding: 5px;
         background-color: aliceblue;
         box-shadow: 2px 2px 5px #dedede, -2px -2px 5px #f7f5f5;
         border-radius: 8px;

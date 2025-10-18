@@ -1,0 +1,72 @@
+@media screen and (max-width: 600px) {
+    .nav-all {
+        // background-color: red;
+        width: 100%;
+        justify-content: flex-start;
+        margin: auto;
+        padding: 15px;
+
+
+        .nav-siteInfo {
+            display: flex;
+            align-items: center;
+
+            .nav-siteLogo {
+                width: 30px;
+                height: 30px;
+                border-radius: 10px;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .nav-siteName {
+                display: none;
+            }
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+            overflow-x: scroll;
+
+            .nav-menu-item {
+                min-width: 70px;
+                margin: 0 5px;
+                font-size: 14px;
+                text-decoration: none;
+                color: rgb(54, 47, 47);
+                font-weight: 500;
+                flex-wrap: nowrap;
+
+                font-family: '优设标题黑';
+                transition: all 0.8 ease;
+
+                padding: 0;
+
+                &.router-link-exact-active {
+                    color: #564dac;
+
+                    border-bottom: 1px solid #564dac;
+                }
+
+
+                &:hover {
+                    color: #564dac;
+
+                }
+            }
+        }
+
+        .mas-all {
+            display: none;
+        }
+
+
+
+    }
+}

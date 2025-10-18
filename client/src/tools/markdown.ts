@@ -5,6 +5,8 @@ import container from 'markdown-it-container'
 import anchor from 'markdown-it-anchor'
 import mdCard from "./markdown-card";
 import mdImg from "./markdown-img";
+import mdLink from "./markdown-link";
+
 import markdownItMermaid from './markdown-mermaid'
 
 
@@ -68,6 +70,7 @@ export function createMarkdown() {
     // 注册自定义语法、组件 !img[]()
     md.use(mdImg);
     md.use(mdCard)
+    md.use(mdLink)
     // 注册插件
     // md.use(markdownItMermaid)
 

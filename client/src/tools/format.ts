@@ -77,3 +77,9 @@ export function formatPath2(str: string): string {
     if (!str) return ''
     return str.trim().replace(/\//g, ' ➖ ')
 }
+
+
+export function formatIconfont(str: string): string {
+    if (!str) return ''
+    return `iconfont icon-${str}`
+}

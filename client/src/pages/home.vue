@@ -42,18 +42,17 @@
 
     <!-- ✅ 分页栏 -->
     <div class="pagination">
-      <button @click="postStore.setPage(postStore.currentPage - 1)" :disabled="postStore.currentPage === 1">
+      <button @click="changePage(postStore.currentPage - 1)" :disabled="postStore.currentPage === 1">
         上一页
       </button>
 
       <span v-for="page in postStore.totalPages" :key="page">
-        <button @click="postStore.setPage(page)" :class="{ active: postStore.currentPage === page }">
+        <button @click="changePage(page)" :class="{ active: postStore.currentPage === page }">
           {{ page }}
         </button>
       </span>
 
-      <button @click="postStore.setPage(postStore.currentPage + 1)"
-        :disabled="postStore.currentPage === postStore.totalPages">
+      <button @click="changePage(postStore.currentPage + 1)" :disabled="postStore.currentPage === postStore.totalPages">
         下一页
       </button>
     </div>
@@ -67,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { nextTick, onMounted } from 'vue';
 import { formatDate_timestamp } from '@/tools/format'
 import { Config } from '@/config';
 
@@ -87,6 +86,18 @@ const getImgSrc = (mo: string) => {
   // 3. 如果有封面图片，存储在项目本身的目录下，则返回对应的图片地址
   return `${Config.CoverServer}${mo}.png`
 }
+
+
+// 点击分页时，等待页面加载后滚动到顶部
+const changePage = (page: number) => {
+  postStore.setPage(page); // 更新页面
+  nextTick(() => {
+    setTimeout(() => {
+      window.scrollTo(0, 0); // 强制滚动到顶部
+    }, 50); // 延迟 50ms 确保页面内容已渲染
+  });
+}
+
 
 onMounted(() => {
   main.setAsideShow(true)

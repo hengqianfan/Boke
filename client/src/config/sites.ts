@@ -1008,7 +1008,7 @@ export const sites: Site[] = [
     },
     {
         name: "熊猫无损",
-        url: "https://www.xmwav.com/",
+        url: "https://xmwav.net/",
         icon: "music",
         desc: "NB！无损音乐下载",
         classOne: "资源网站",
@@ -1559,5 +1559,13 @@ export const sites: Site[] = [
         classTwo: "工具网站"
     },
 
+    {
+        name: "TapTap",
+        url: "hhttps://www.taptap.cn/",
+        icon: "taptap",
+        desc: "手游下载与资讯平台",
+        classOne: "游戏相关",
+        classTwo: "游戏平台"
+    },
 
 ]

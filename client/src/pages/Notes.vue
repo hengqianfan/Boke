@@ -24,7 +24,6 @@ import { useRouter } from 'vue-router';
 import { useMainStore } from '@/stores/main';
 import { onMounted } from 'vue';
 
-
 const main = useMainStore()
 const notes = getAllNotes();
 
@@ -175,7 +174,7 @@ onMounted(() => {
 
 @media screen and (max-width: 600px) {
     .notes-all {
-        padding: 2rem;
+        padding: 10px;
         min-height: 50vh;
         width: 100%;
     }
@@ -195,7 +194,8 @@ onMounted(() => {
         border: 1px solid #ddd;
         border-radius: 12px;
         background: #fff;
-        margin-bottom: 10px;
+        // 控制卡片的位置
+        margin-bottom: 20px;
         margin-left: 0px;
         transition: transform 0.2s;
         position: relative;

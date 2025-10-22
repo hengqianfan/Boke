@@ -23,6 +23,7 @@ router.afterEach((to) => {
             ? to.meta.title
             : defaultTitle
     document.title = title
+
 })
 
 const app = createApp(App)

@@ -4,6 +4,7 @@
     // 让导航栏水平居中
     // 这里 auto 无法控制居中
     margin: 0 5%;
+    // margin-top: 20px;
     padding: 0 8%;
 
     display: flex;
@@ -11,10 +12,9 @@
     align-items: center;
 
     background-color: white;
-
-
-
+    background-color: #564dac;
     border-radius: 0 0 15px 15px;
+    // border-radius: 20px;
 
     box-shadow: 2px 2px 5px #dedede,
         -2px -2px 5px #ffffff;

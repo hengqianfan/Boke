@@ -998,14 +998,7 @@ export const sites: Site[] = [
         classOne: "资源网站",
         classTwo: "音乐音频"
     },
-    {
-        name: "myfreemp3",
-        url: "https://tool.liumingye.cn/music/#/",
-        icon: "music",
-        desc: "在线音乐播放（已停运）",
-        classOne: "资源网站",
-        classTwo: "音乐音频"
-    },
+
     {
         name: "熊猫无损",
         url: "https://xmwav.net/",
@@ -1561,11 +1554,28 @@ export const sites: Site[] = [
 
     {
         name: "TapTap",
-        url: "hhttps://www.taptap.cn/",
+        url: "https://www.taptap.cn/",
         icon: "taptap",
         desc: "手游下载与资讯平台",
         classOne: "游戏相关",
         classTwo: "游戏平台"
+    },
+    {
+        name: '米兔音乐',
+        url: "https://www.qqmp3.vip/",
+        icon: "music",
+        desc: "免费音乐下载网站",
+        classOne: "资源网站",
+        classTwo: "音乐音频"
+    },
+    // 已失效的网址
+    {
+        name: "myfreemp3",
+        url: "https://tool.liumingye.cn/music/#/",
+        icon: "music",
+        desc: "在线音乐播放（已停运）",
+        classOne: "资源网站",
+        classTwo: "音乐音频"
     },
 
 ]

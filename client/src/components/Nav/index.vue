@@ -10,14 +10,6 @@
         <NavSearch></NavSearch>
 
 
-        <!-- <div class="nav-menu">
-            <router-link to="/" class="nav-menu-item">文章区 📑</router-link>
-            <router-link to="/notes" class="nav-menu-item">知识库 📚</router-link>
-            <router-link to="/sites" class="nav-menu-item">网站库 🧭</router-link>
-
-            <router-link to="/post/about" class="nav-menu-item">关于本站 💬</router-link>
-
-        </div> -->
 
         <div class="nav-menu">
             <div v-for="item in navItems" :key="item.to" class="nav-menu-item" @click="handleNavClick(item.to)">

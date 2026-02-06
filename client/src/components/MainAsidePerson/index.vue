@@ -14,8 +14,6 @@
             {{ nowTime }}
         </div>
 
-
-
     </div>
 </template>
 
